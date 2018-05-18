@@ -5,25 +5,29 @@
 #include "../Dependencies/GLFW/include/GLFW/glfw3.h"
 #include "../Dependencies/glm/glm.hpp"
 #include "abs/GLabs.h"
+#include "geo/Vertex.h"
+#include "geo/ShapeGenerator.h"
 
-const float X_DELTA = 0.1f;
 const unsigned int NUM_VERTS_TRI = 3;
 const unsigned int NUM_FLOATS_VERTS = 6;
-const unsigned int TRIANGLE_BYTE_SIZE = NUM_FLOATS_VERTS * NUM_VERTS_TRI * sizeof(float);
-const unsigned int MAX_TRIS = 20;
-unsigned int numTris;
+const unsigned int VERTEX_BYTE_SIZE = NUM_FLOATS_VERTS * sizeof(float);
 
 void sendDataToOpenGL() 
 {
+	ShapeData tri = ShapeGenerator::MakeTriangle();
 	GLabs::Buffer vertexBuffer;
-	vertexBuffer.Bind(GL_ARRAY_BUFFER);
-	glBufferData(GL_ARRAY_BUFFER, MAX_TRIS*TRIANGLE_BYTE_SIZE, NULL, GL_STATIC_DRAW);
+	vertexBuffer.Data(GL_ARRAY_BUFFER, tri.VertexBufferSize(), tri.vertices, GL_STATIC_DRAW);
+
+	GLabs::Buffer elementBuffer;
+	elementBuffer.Data(GL_ELEMENT_ARRAY_BUFFER, tri.IndexBufferSize(), tri.indices, GL_STATIC_DRAW);
 
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
 
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), nullptr);
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+
+	tri.CleanUp();
 }
 
 GLuint ShaderProgram()
@@ -56,29 +60,6 @@ GLuint ShaderProgram()
 	Program.UseProgram();
 
 	return Program.ProgramID();
-}
-
-void sendTri()
-{
-	if (numTris == MAX_TRIS)
-	{
-		return;
-	}
-	const float TRI_X = -1 + numTris * X_DELTA;
-	struct Vertex
-	{
-		glm::vec3 position;
-		glm::vec3 colour;
-	};
-
-	Vertex thisTri[]
-	{
-		Vertex{ glm::vec3(TRI_X, +1.0f, +0.0f), glm::vec3(+1.0f, +0.0f, +0.0f) },
-		Vertex{ glm::vec3(TRI_X + X_DELTA, +1.0f, +0.0f), glm::vec3(+1.0f, +0.0f, +0.0f) },
-		Vertex{ glm::vec3(TRI_X, +0.0f, +0.0f), glm::vec3(+1.0f, +0.0f, +0.0f) }
-	};
-	glBufferSubData(GL_ARRAY_BUFFER, numTris*TRIANGLE_BYTE_SIZE, TRIANGLE_BYTE_SIZE, thisTri);
-	numTris++;
 }
 
 int main()
@@ -114,14 +95,10 @@ int main()
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glClearColor(+0.0f, +0.0f, +0.0f, +1.0f);
 
-		sendTri();
-
-		glDrawArrays(GL_TRIANGLES, (numTris-1)*NUM_VERTS_TRI, numTris * NUM_VERTS_TRI);
+		glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_SHORT, 0);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
-
-		system("pause");
 	}
 
 	glfwDestroyWindow(window);

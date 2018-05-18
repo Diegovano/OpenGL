@@ -30,6 +30,7 @@ namespace GLabs
 			glBufferSubData(bindPoint, offset, size, data);
 		}
 		const GLuint BufferID();
+		void DeleteBuffer();
 	};
 
 	class Shader

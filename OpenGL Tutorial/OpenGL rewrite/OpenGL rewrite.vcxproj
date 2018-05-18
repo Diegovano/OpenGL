@@ -124,6 +124,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\abs\GLabs.cpp" />
+    <ClCompile Include="src\geo\ShapeData.cpp" />
+    <ClCompile Include="src\geo\ShapeGenerator.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -149,6 +151,9 @@
     <ClInclude Include="Dependencies\glm\simd\trigonometric.h" />
     <ClInclude Include="Dependencies\glm\simd\vector_relational.h" />
     <ClInclude Include="src\abs\GLabs.h" />
+    <ClInclude Include="src\geo\ShapeData.h" />
+    <ClInclude Include="src\geo\ShapeGenerator.h" />
+    <ClInclude Include="src\geo\Vertex.h" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="Dependencies\GLFW\lib-vc2015\glfw3.lib" />

@@ -13,6 +13,10 @@ const GLuint GLabs::Buffer::BufferID()
 {
 	return m_bufferID;
 }
+void GLabs::Buffer::DeleteBuffer()
+{
+	glDeleteBuffers(1, &m_bufferID);
+}
 
 
 
