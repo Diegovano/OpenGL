@@ -123,7 +123,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="rsc\abs\GLabs.cpp" />
+    <ClCompile Include="src\abs\GLabs.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -148,7 +148,7 @@
     <ClInclude Include="Dependencies\glm\simd\platform.h" />
     <ClInclude Include="Dependencies\glm\simd\trigonometric.h" />
     <ClInclude Include="Dependencies\glm\simd\vector_relational.h" />
-    <ClInclude Include="rsc\abs\GLabs.h" />
+    <ClInclude Include="src\abs\GLabs.h" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="Dependencies\GLFW\lib-vc2015\glfw3.lib" />

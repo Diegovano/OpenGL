@@ -4,7 +4,7 @@
 #include "../Dependencies/GLEW/include/GL/glew.h"
 #include "../Dependencies/GLFW/include/GLFW/glfw3.h"
 #include "../Dependencies/glm/glm.hpp"
-#include "../rsc/abs/GLabs.h"
+#include "abs/GLabs.h"
 
 const float X_DELTA = 0.1f;
 const unsigned int NUM_VERTS_TRI = 3;
@@ -28,8 +28,8 @@ void sendDataToOpenGL()
 
 GLuint ShaderProgram()
 {
-	std::ifstream vshFileStream("D:\\Program Files (x86)\\msdev\\dev\\OpenGL rewrite\\OpenGL rewrite\\rsc\\sh\\vsh.shader");
-	std::ifstream fshFileStream("D:\\Program Files (x86)\\msdev\\dev\\OpenGL rewrite\\OpenGL rewrite\\rsc\\sh\\fsh.shader");
+	std::ifstream vshFileStream("D:\\Program Files (x86)\\msdev\\OpenGL\\OpenGL Tutorial\\OpenGL rewrite\\rsc\\sh\\vsh.shader");
+	std::ifstream fshFileStream("D:\\Program Files (x86)\\msdev\\OpenGL\\OpenGL Tutorial\\OpenGL rewrite\\rsc\\sh\\fsh.shader");
 
 	std::string StrVertex = std::string(std::istreambuf_iterator<char>(vshFileStream), std::istreambuf_iterator<char>());
 	std::string StrFragment = std::string(std::istreambuf_iterator<char>(fshFileStream), std::istreambuf_iterator<char>());
