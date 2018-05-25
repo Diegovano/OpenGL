@@ -4,6 +4,7 @@
 #include "../Dependencies/GLEW/include/GL/glew.h"
 #include "../Dependencies/GLFW/include/GLFW/glfw3.h"
 #include "../Dependencies/glm/glm.hpp"
+#include "../Dependencies/glm/gtc/matrix_transform.hpp"
 #include "abs/GLabs.h"
 #include "geo/Vertex.h"
 #include "geo/ShapeGenerator.h"
@@ -11,23 +12,25 @@
 const unsigned int NUM_VERTS_TRI = 3;
 const unsigned int NUM_FLOATS_VERTS = 6;
 const unsigned int VERTEX_BYTE_SIZE = NUM_FLOATS_VERTS * sizeof(float);
+GLuint numIndices;
 
 void sendDataToOpenGL() 
 {
-	ShapeData tri = ShapeGenerator::MakeTriangle();
+	ShapeData shape = ShapeGenerator::MakeTriangle();
 	GLabs::Buffer vertexBuffer;
-	vertexBuffer.Data(GL_ARRAY_BUFFER, tri.VertexBufferSize(), tri.vertices, GL_STATIC_DRAW);
+	vertexBuffer.Data(GL_ARRAY_BUFFER, shape.VertexBufferSize(), shape.vertices, GL_STATIC_DRAW);
 
 	GLabs::Buffer elementBuffer;
-	elementBuffer.Data(GL_ELEMENT_ARRAY_BUFFER, tri.IndexBufferSize(), tri.indices, GL_STATIC_DRAW);
+	elementBuffer.Data(GL_ELEMENT_ARRAY_BUFFER, shape.IndexBufferSize(), shape.indices, GL_STATIC_DRAW);
 
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
 
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), nullptr);
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+	numIndices = shape.numIndices;
 
-	tri.CleanUp();
+	shape.CleanUp();
 }
 
 GLuint ShaderProgram()
@@ -83,6 +86,9 @@ int main()
 
 	glEnable(GL_DEPTH_TEST);
 
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glClearColor(+0.0f, +1.0f, +0.0f, +1.0f);
+
 	sendDataToOpenGL();
 	GLuint program = ShaderProgram();
 
@@ -92,10 +98,20 @@ int main()
 		glfwGetWindowSize(window, &width, &height);
 		glViewport(0, 0, width, height);
 
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glClearColor(+0.0f, +0.0f, +0.0f, +1.0f);
+		glm::mat4 modelTransformMatrix = glm::translate(glm::mat4(), glm::vec3(0.0f, 0.0f, 0.0f));
+		glm::mat4 projectionMatrix = glm::perspective(60.0f, 1280.0f/720.0f, 0.1f, 10.0f);
 
-		glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_SHORT, 0);
+		GLint TransformMatrixUniformLocation =
+			glGetUniformLocation(program, "modelTransformMatrix");
+		GLint ProjectionMatrixUniformLocation =
+			glGetUniformLocation(program, "projectionMatrix");
+
+		glUniformMatrix4fv(TransformMatrixUniformLocation, 1,
+			GL_FALSE, &modelTransformMatrix[0][0]);
+		glUniformMatrix4fv(ProjectionMatrixUniformLocation, 1,
+			GL_FALSE, &projectionMatrix[0][0]);
+
+		glDrawElements(GL_TRIANGLES, numIndices, GL_UNSIGNED_SHORT, 0);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
