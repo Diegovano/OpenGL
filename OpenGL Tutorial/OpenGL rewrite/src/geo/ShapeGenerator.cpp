@@ -41,18 +41,18 @@ ShapeData ShapeGenerator::MakeCube()
 	Vertex myCube[]
 	{
 		glm::vec3(-1.0f, +1.0f, +1.0f), // 0
-		glm::vec3(+1.0f, +0.0f, +0.0f), //Colour
+		glm::vec3(+1.0f, +0.0f, +0.0f), // Colour
 		glm::vec3(+1.0f, +1.0f, +1.0f), // 1
-		glm::vec3(+0.0f, +1.0f, +0.0f), //Colour
+		glm::vec3(+0.0f, +1.0f, +0.0f), // Colour
 		glm::vec3(+1.0f, +1.0f, -1.0f), // 2
-		glm::vec3(+0.0f, +0.0f, +1.0f), //Colour
-		glm::vec3(+1.0f, +1.0f, -1.0f), // 3
-		glm::vec3(+1.0f, +1.0f, +1.0f), //Colour
+		glm::vec3(+0.0f, +0.0f, +1.0f), // Colour
+		glm::vec3(-1.0f, +1.0f, -1.0f), // 3
+		glm::vec3(+1.0f, +1.0f, +1.0f), // Colour
 
 		glm::vec3(-1.0f, +1.0f, -1.0f), // 4
-		glm::vec3(+1.0f, +0.0f, +1.0f), //Colour
+		glm::vec3(+1.0f, +0.0f, +1.0f), // Colour
 		glm::vec3(+1.0f, +1.0f, -1.0f), // 5
-		glm::vec3(+0.0f, +0.5f, +0.2f), //Colour
+		glm::vec3(+0.0f, +0.5f, +0.2f), // Colour
 		glm::vec3(+1.0f, -1.0f, -1.0f), // 6
 		glm::vec3(+0.8f, +0.6f, +0.4f), // Colour
 		glm::vec3(-1.0f, -1.0f, -1.0f), // 7
