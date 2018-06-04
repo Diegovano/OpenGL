@@ -62,6 +62,9 @@ GLuint ShaderProgram()
 	Program.Link();
 	Program.UseProgram();
 
+	FragmentShader.Delete();
+	VertexShader.Delete();
+
 	return Program.ProgramID();
 }
 
@@ -87,7 +90,7 @@ int main()
 	glEnable(GL_DEPTH_TEST);
 
 	sendDataToOpenGL();
-	GLuint program = ShaderProgram();
+	GLuint programID = ShaderProgram();
 
 	while (!glfwWindowShouldClose(window))
 	{
@@ -102,7 +105,7 @@ int main()
 		glm::mat4 fullTransformMatrix = glm::rotate(projectionTranslationMatrix, glm::radians(56.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 
 		GLint fullTransformMatrixUniformLocation =
-			glGetUniformLocation(program, "fullTransformMatrix");
+			glGetUniformLocation(programID, "fullTransformMatrix");
 
 		glUniformMatrix4fv(fullTransformMatrixUniformLocation, 1,
 			GL_FALSE, &fullTransformMatrix[0][0]);
@@ -113,6 +116,8 @@ int main()
 		glfwPollEvents();
 	}
 
+	glUseProgram(0);
+	glDeleteProgram(programID);
 	glfwDestroyWindow(window);
 	glfwTerminate();
 	return 0;

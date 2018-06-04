@@ -51,6 +51,9 @@ namespace GLabs
 		void AttachSource(const char** src);
 
 		bool Compile();
+
+		void Delete();
+
 		const GLuint ShaderID();
 	};
 

@@ -45,6 +45,12 @@ bool GLabs::Shader::Compile()
 	m_compiled = 1;
 	return true;
 }
+
+void GLabs::Shader::Delete()
+{
+	glDeleteShader(m_shaderID);
+}
+
 const GLuint GLabs::Shader::ShaderID()
 {
 	return m_shaderID;
