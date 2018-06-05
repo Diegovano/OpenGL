@@ -1,18 +1,21 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-#include "../Dependencies/GLEW/include/GL/glew.h"
-#include "../Dependencies/GLFW/include/GLFW/glfw3.h"
-#include "../Dependencies/glm/glm.hpp"
-#include "../Dependencies/glm/gtc/matrix_transform.hpp"
+#include <GLEW/include/GL/glew.h>
+#include <GLFW/include/GLFW/glfw3.h>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtx/transform.hpp>
 #include "abs/GLabs.h"
 #include "geo/Vertex.h"
 #include "geo/ShapeGenerator.h"
+#include "cam/Camera.h"
 
 const unsigned int NUM_VERTS_TRI = 3;
 const unsigned int NUM_FLOATS_VERTS = 6;
 const unsigned int VERTEX_BYTE_SIZE = NUM_FLOATS_VERTS * sizeof(float);
 GLuint numIndices;
+Camera camera;
 
 void sendDataToOpenGL() 
 {
@@ -31,6 +34,25 @@ void sendDataToOpenGL()
 	numIndices = shape.numIndices;
 
 	shape.CleanUp();
+
+	GLabs::Buffer tranformationMatrixBuffer;
+	tranformationMatrixBuffer.Bind(GL_ARRAY_BUFFER);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(glm::mat4) * 2, 0, GL_DYNAMIC_DRAW);
+
+	glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void*)(0 * sizeof(float)));
+	glVertexAttribPointer(3, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void*)(4 * sizeof(float)));
+	glVertexAttribPointer(4, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void*)(8 * sizeof(float)));
+	glVertexAttribPointer(5, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void*)(12 * sizeof(float)));
+
+	glEnableVertexAttribArray(2);
+	glEnableVertexAttribArray(3);
+	glEnableVertexAttribArray(4);
+	glEnableVertexAttribArray(5);
+
+	glVertexAttribDivisor(2, 1);
+	glVertexAttribDivisor(3, 1);
+	glVertexAttribDivisor(4, 1);
+	glVertexAttribDivisor(5, 1);
 }
 
 GLuint ShaderProgram()
@@ -53,13 +75,17 @@ GLuint ShaderProgram()
 	FragmentShader.Compile();
 
 	GLabs::ShaderProgram Program;
+
 	Program.AttachShader(VertexShader);
 	Program.AttachShader(FragmentShader);
 
-	Program.AddAttribute(0, "vertex_position");
-	Program.AddAttribute(1, "vertex_colour");
+//	Program.AddAttribute(0, "vertex_position");
+//	Program.AddAttribute(1, "vertex_colour");
 
 	Program.Link();
+
+	GLint positionLocation = glGetAttribLocation(Program.ProgramID(), "position");
+
 	Program.UseProgram();
 
 	FragmentShader.Delete();
@@ -75,9 +101,13 @@ int main()
 		std::cerr << "GLFW Initialisation failure!" << std::endl;
 	}
 
+	double aspectRatio = 16 / 9;
+	int width = 1920, height = (width / 16) * 9; //Window dimentions
+
 	GLFWwindow* window;
-	window = glfwCreateWindow(1280, 720, "Superb Window", 0, 0);
+	window = glfwCreateWindow(width, height, "Superb Window", 0, 0);
 	glfwMakeContextCurrent(window);
+	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 
 	GLenum errCode = glewInit();
 	if (errCode != GLEW_OK)
@@ -96,21 +126,25 @@ int main()
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glClearColor(+0.0f, +0.0f, +0.0f, +1.0f);
-		int height, width;
-		glfwGetWindowSize(window, &width, &height);
-		glViewport(0, 0, width, height);
 
-		glm::mat4 projectionMatrix = glm::perspective(glm::radians(60.0f), (float)width/(float)height, 0.1f, 10.0f);
-		glm::mat4 projectionTranslationMatrix = glm::translate(projectionMatrix, glm::vec3(0.0f, 0.0f, -3.0f));
-		glm::mat4 fullTransformMatrix = glm::rotate(projectionTranslationMatrix, glm::radians(56.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+		int tempHeight, tempWidth;
+		glfwGetWindowSize(window, &tempWidth, &tempHeight);
+		glViewport(0, 0, tempWidth, tempHeight);
 
-		GLint fullTransformMatrixUniformLocation =
-			glGetUniformLocation(programID, "fullTransformMatrix");
+		const int SENSITIVITYDIV = 20;
+		double xpos, ypos;
+		glfwGetCursorPos(window, &xpos, &ypos);
+		camera.mouseUpdate(glm::vec2((xpos - tempWidth/2)/SENSITIVITYDIV, (ypos - tempHeight/2)/SENSITIVITYDIV));
 
-		glUniformMatrix4fv(fullTransformMatrixUniformLocation, 1,
-			GL_FALSE, &fullTransformMatrix[0][0]);
+		glm::mat4 projectionMatrix = glm::perspective(glm::radians(75.0f), (float)width / (float)height, 0.1f, 10.0f);
+		glm::mat4 fullTransforms[] =
+		{
+			projectionMatrix * camera.GetWorldToViewMatrix() * glm::translate(glm::vec3(-1.0f, 0.0f, -3.0f)) * glm::rotate(glm::radians(36.0f), glm::vec3(1.0f, 0.0f, 0.0f)),
+			projectionMatrix * camera.GetWorldToViewMatrix() * glm::translate(glm::vec3(1.0f, 0.0f, -3.75f)) * glm::rotate(glm::radians(126.0f), glm::vec3(0.0f, 1.0f, 0.0f))
+		};
+		glBufferData(GL_ARRAY_BUFFER, sizeof(fullTransforms), fullTransforms, GL_DYNAMIC_DRAW);
 
-		glDrawElements(GL_TRIANGLES, numIndices, GL_UNSIGNED_SHORT, 0);
+		glDrawElementsInstanced(GL_TRIANGLES, numIndices, GL_UNSIGNED_SHORT, 0, 2);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();

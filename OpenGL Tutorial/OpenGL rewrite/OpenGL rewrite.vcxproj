@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -123,6 +123,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\cam\Camera.cpp" />
     <ClCompile Include="src\abs\GLabs.cpp" />
     <ClCompile Include="src\geo\ShapeData.cpp" />
     <ClCompile Include="src\geo\ShapeGenerator.cpp" />
@@ -134,6 +135,7 @@
     <None Include="rsc\sh\vsh.shader" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\cam\Camera.h" />
     <ClInclude Include="Dependencies\GLEW\include\GL\eglew.h" />
     <ClInclude Include="Dependencies\GLEW\include\GL\glew.h" />
     <ClInclude Include="Dependencies\GLEW\include\GL\glxew.h" />

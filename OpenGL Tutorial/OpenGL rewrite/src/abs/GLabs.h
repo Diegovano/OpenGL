@@ -72,7 +72,8 @@ namespace GLabs
 		void AttachShader(Shader shaderToAttach);
 		void AddAttribute(GLuint attributeNumber, const char* attributeName);
 		bool Link();
-		void UseProgram();
-		const GLuint ProgramID();
+		void UseProgram() const;
+		void CleanUp();
+		const GLuint ProgramID() const;
 	};
 }

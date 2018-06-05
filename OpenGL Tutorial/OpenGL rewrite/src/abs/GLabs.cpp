@@ -87,7 +87,7 @@ bool GLabs::ShaderProgram::Link()
 	m_linked = true;
 	return true;
 }
-void GLabs::ShaderProgram::UseProgram()
+void GLabs::ShaderProgram::UseProgram() const
 {
 	if (!m_linked)
 	{
@@ -96,7 +96,12 @@ void GLabs::ShaderProgram::UseProgram()
 	}
 	glUseProgram(m_programID);
 }
-const GLuint GLabs::ShaderProgram::ProgramID()
+void GLabs::ShaderProgram::CleanUp()
+{
+	glUseProgram(0);
+	glDeleteProgram(m_programID);
+}
+const GLuint GLabs::ShaderProgram::ProgramID() const
 {
 	return m_programID;
 }

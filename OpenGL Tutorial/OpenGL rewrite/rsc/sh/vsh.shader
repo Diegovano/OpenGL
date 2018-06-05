@@ -2,8 +2,7 @@
 
 layout(location = 0) in vec3 vertex_position;
 layout(location = 1) in vec3 vertex_colour;
-
-uniform mat4 fullTransformMatrix;
+layout(location = 2) in mat4 fullTransformMatrix;
 
 out vec3 pass_vertex_colour;
 
