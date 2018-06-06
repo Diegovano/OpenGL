@@ -1,8 +1,6 @@
 #include <iostream>
 #include <fstream>
-#include <vector>
-#include <GLEW/include/GL/glew.h>
-#include <GLFW/include/GLFW/glfw3.h>
+#include "Window/Window.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/transform.hpp>
@@ -52,7 +50,7 @@ void sendDataToOpenGL()
 	glVertexAttribDivisor(2, 1);
 	glVertexAttribDivisor(3, 1);
 	glVertexAttribDivisor(4, 1);
-	glVertexAttribDivisor(5, 1);
+	glVertexAttribDivisor(5, 1);  
 }
 
 GLuint ShaderProgram()
@@ -79,12 +77,7 @@ GLuint ShaderProgram()
 	Program.AttachShader(VertexShader);
 	Program.AttachShader(FragmentShader);
 
-//	Program.AddAttribute(0, "vertex_position");
-//	Program.AddAttribute(1, "vertex_colour");
-
 	Program.Link();
-
-	GLint positionLocation = glGetAttribLocation(Program.ProgramID(), "position");
 
 	Program.UseProgram();
 
@@ -94,65 +87,53 @@ GLuint ShaderProgram()
 	return Program.ProgramID();
 }
 
-int main()
+static void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
 {
-	if (!glfwInit())
-	{
-		std::cerr << "GLFW Initialisation failure!" << std::endl;
-	}
+	int halfWidth, halfHeight;
+	glfwGetWindowSize(window, &halfWidth, &halfHeight);
+	halfWidth /= 2.0f;
+	halfHeight /= 2.0f;
 
-	double aspectRatio = 16 / 9;
-	int width = 1920, height = (width / 16) * 9; //Window dimentions
+	camera.mouseUpdate(glm::vec2((xpos - halfWidth), (ypos - halfHeight)));
+}
 
-	GLFWwindow* window;
-	window = glfwCreateWindow(width, height, "Superb Window", 0, 0);
-	glfwMakeContextCurrent(window);
-	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-
-	GLenum errCode = glewInit();
-	if (errCode != GLEW_OK)
-	{
-		std::cerr << "GLEW Intialisation failure!" << std::endl;
-		glfwTerminate();
-		return -1;
-	}
-
-	glEnable(GL_DEPTH_TEST);
+int main(int argc, char* argv[])
+{
+	Window window("Superb Window", 1280, 720);
+	window.WindowInit();
+	window.SetIcon("rsc\\icon.png", 64);
+	window.OpenGLInit();
 
 	sendDataToOpenGL();
 	GLuint programID = ShaderProgram();
 
-	while (!glfwWindowShouldClose(window))
+	while (window.WindowOpen())
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glClearColor(+0.0f, +0.0f, +0.0f, +1.0f);
 
-		int tempHeight, tempWidth;
-		glfwGetWindowSize(window, &tempWidth, &tempHeight);
-		glViewport(0, 0, tempWidth, tempHeight);
-
-		const int SENSITIVITYDIV = 20;
-		double xpos, ypos;
-		glfwGetCursorPos(window, &xpos, &ypos);
-		camera.mouseUpdate(glm::vec2((xpos - tempWidth/2)/SENSITIVITYDIV, (ypos - tempHeight/2)/SENSITIVITYDIV));
-
-		glm::mat4 projectionMatrix = glm::perspective(glm::radians(75.0f), (float)width / (float)height, 0.1f, 10.0f);
+		window.SetCursorPosCallback(cursor_position_callback);
+		int currWidth, currHeight;
+		window.WindowGetSize(currWidth, currHeight);
+		
+		glm::mat4 projectionMatrix = glm::perspective(glm::radians(75.0f), (float)currWidth / (float)currHeight, 0.1f, 10.0f);
 		glm::mat4 fullTransforms[] =
 		{
 			projectionMatrix * camera.GetWorldToViewMatrix() * glm::translate(glm::vec3(-1.0f, 0.0f, -3.0f)) * glm::rotate(glm::radians(36.0f), glm::vec3(1.0f, 0.0f, 0.0f)),
 			projectionMatrix * camera.GetWorldToViewMatrix() * glm::translate(glm::vec3(1.0f, 0.0f, -3.75f)) * glm::rotate(glm::radians(126.0f), glm::vec3(0.0f, 1.0f, 0.0f))
-		};
+		}; 
 		glBufferData(GL_ARRAY_BUFFER, sizeof(fullTransforms), fullTransforms, GL_DYNAMIC_DRAW);
 
 		glDrawElementsInstanced(GL_TRIANGLES, numIndices, GL_UNSIGNED_SHORT, 0, 2);
 
-		glfwSwapBuffers(window);
-		glfwPollEvents();
+//		glDrawElements(GL_TRIANGLES, numIndices, GL_UNSIGNED_SHORT, 0);
+
+		window.WindowUpdate();
 	}
 
 	glUseProgram(0);
 	glDeleteProgram(programID);
-	glfwDestroyWindow(window);
+	window.WindowDestroy();
 	glfwTerminate();
 	return 0;
 }

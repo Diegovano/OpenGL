@@ -30,6 +30,9 @@
     <ClCompile Include="src\cam\Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Window\Window.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="rsc\sh\fsh.shader" />
@@ -100,9 +103,20 @@
     <ClInclude Include="src\cam\Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Window\Window.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\logger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Library Include="Dependencies\GLFW\lib-vc2015\glfw3.lib" />
     <Library Include="Dependencies\GLFW\lib-vc2015\glfw3dll.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="rsc\icon.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

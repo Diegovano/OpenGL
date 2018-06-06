@@ -1,5 +1,5 @@
 #include <iostream>
-#include "../Dependencies/GLEW/include/GL/glew.h"
+#include <GLEW/include/GL/glew.h>
 #include "GLabs.h"
 
 
@@ -84,6 +84,7 @@ bool GLabs::ShaderProgram::Link()
 		std::cout << "Link Error: " << (buffer) << std::endl;
 		return false;
 	}
+	Log("Program Linked.");
 	m_linked = true;
 	return true;
 }
