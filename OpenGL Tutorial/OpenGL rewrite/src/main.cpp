@@ -91,10 +91,35 @@ static void cursor_position_callback(GLFWwindow* window, double xpos, double ypo
 {
 	int halfWidth, halfHeight;
 	glfwGetWindowSize(window, &halfWidth, &halfHeight);
-	halfWidth /= 2.0f;
-	halfHeight /= 2.0f;
+	halfWidth /= 2;
+	halfHeight /= 2;
 
 	camera.mouseUpdate(glm::vec2((xpos - halfWidth), (ypos - halfHeight)));
+}
+
+static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+	switch (key)
+	{
+	case(GLFW_KEY_W):
+		camera.MoveForward();
+		break;
+	case(GLFW_KEY_A):
+		camera.StrafeLeft();
+		break;
+	case(GLFW_KEY_S):
+		camera.MoveBackward();
+		break;
+	case(GLFW_KEY_D):
+		camera.StrafeRight();
+		break;
+	case(GLFW_KEY_R):
+		camera.MoveUp();
+		break;
+	case(GLFW_KEY_F):
+		camera.MoveDown();
+		break;
+	}
 }
 
 int main(int argc, char* argv[])
@@ -107,15 +132,16 @@ int main(int argc, char* argv[])
 	sendDataToOpenGL();
 	GLuint programID = ShaderProgram();
 
+	window.SetCursorPosCallback(cursor_position_callback);
+	window.SetKeyCallback(key_callback);
+
 	while (window.WindowOpen())
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glClearColor(+0.0f, +0.0f, +0.0f, +1.0f);
 
-		window.SetCursorPosCallback(cursor_position_callback);
 		int currWidth, currHeight;
 		window.WindowGetSize(currWidth, currHeight);
-		
 		glm::mat4 projectionMatrix = glm::perspective(glm::radians(75.0f), (float)currWidth / (float)currHeight, 0.1f, 10.0f);
 		glm::mat4 fullTransforms[] =
 		{

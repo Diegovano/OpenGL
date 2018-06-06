@@ -32,4 +32,5 @@ public:
 	void WindowDestroy(void);
 	void WindowGetSize(int &width, int &height);
 	void SetCursorPosCallback(GLFWcursorposfun cbfun);
+	void SetKeyCallback(GLFWkeyfun cbfun);
 };
