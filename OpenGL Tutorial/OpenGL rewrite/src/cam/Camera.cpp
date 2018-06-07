@@ -2,14 +2,14 @@
 #include <glm/gtx/transform.hpp>
 #include "../logger.h"
 
-const float Camera::MOVEMENT_SPEED = 0.1f;
+const float Camera::MOVEMENT_SPEED = 0.02f;
 
 Camera::Camera() : m_viewDirection(0.0f, 0.0f, -1.0f),
 	m_UP(0.0f,1.0f,0.0f), m_position(0.0f,0.0f,0.0f)
 {
 }
 
-void Camera::mouseUpdate(const glm::vec2& newMousePosition)
+void Camera::MouseUpdate(const glm::vec2& newMousePosition)
 {
 	const float ROTATION_SPEED = 0.5f;
 

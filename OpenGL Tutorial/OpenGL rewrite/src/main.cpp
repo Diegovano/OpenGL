@@ -7,15 +7,16 @@
 #include "abs/GLabs.h"
 #include "geo/Vertex.h"
 #include "geo/ShapeGenerator.h"
-#include "cam/Camera.h"
 
 const unsigned int NUM_VERTS_TRI = 3;
 const unsigned int NUM_FLOATS_VERTS = 6;
 const unsigned int VERTEX_BYTE_SIZE = NUM_FLOATS_VERTS * sizeof(float);
-GLuint numIndices;
+GLuint cubeNumIndices;
+GLuint arrowNumIndices;
 Camera camera;
+GLuint fullTransformationUniformLocation;
 
-void sendDataToOpenGL() 
+void SendDataToOpenGL() 
 {
 	ShapeData shape = ShapeGenerator::MakeCube();
 	GLabs::Buffer vertexBuffer;
@@ -29,28 +30,24 @@ void sendDataToOpenGL()
 
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), nullptr);
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
-	numIndices = shape.numIndices;
+	cubeNumIndices = shape.numIndices;
+
+	shape.CleanUp();	
+	
+	
+	shape = ShapeGenerator::MakeArrow();
+	GLabs::Buffer vertexBuffer2;
+	vertexBuffer2.Data(GL_ARRAY_BUFFER, shape.VertexBufferSize(), shape.vertices, GL_STATIC_DRAW);
+
+	GLabs::Buffer elementBuffer2;
+	elementBuffer2.Data(GL_ELEMENT_ARRAY_BUFFER, shape.IndexBufferSize(), shape.indices, GL_STATIC_DRAW);
+
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), nullptr);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+	arrowNumIndices = shape.numIndices;
 
 	shape.CleanUp();
 
-	GLabs::Buffer tranformationMatrixBuffer;
-	tranformationMatrixBuffer.Bind(GL_ARRAY_BUFFER);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(glm::mat4) * 2, 0, GL_DYNAMIC_DRAW);
-
-	glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void*)(0 * sizeof(float)));
-	glVertexAttribPointer(3, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void*)(4 * sizeof(float)));
-	glVertexAttribPointer(4, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void*)(8 * sizeof(float)));
-	glVertexAttribPointer(5, 4, GL_FLOAT, GL_FALSE, sizeof(glm::mat4), (void*)(12 * sizeof(float)));
-
-	glEnableVertexAttribArray(2);
-	glEnableVertexAttribArray(3);
-	glEnableVertexAttribArray(4);
-	glEnableVertexAttribArray(5);
-
-	glVertexAttribDivisor(2, 1);
-	glVertexAttribDivisor(3, 1);
-	glVertexAttribDivisor(4, 1);
-	glVertexAttribDivisor(5, 1);  
 }
 
 GLuint ShaderProgram()
@@ -87,72 +84,59 @@ GLuint ShaderProgram()
 	return Program.ProgramID();
 }
 
-static void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
+static void CursorPositionCallback(GLFWwindow* window, double xpos, double ypos)
 {
 	int halfWidth, halfHeight;
 	glfwGetWindowSize(window, &halfWidth, &halfHeight);
 	halfWidth /= 2;
 	halfHeight /= 2;
 
-	camera.mouseUpdate(glm::vec2((xpos - halfWidth), (ypos - halfHeight)));
-}
-
-static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
-{
-	switch (key)
-	{
-	case(GLFW_KEY_W):
-		camera.MoveForward();
-		break;
-	case(GLFW_KEY_A):
-		camera.StrafeLeft();
-		break;
-	case(GLFW_KEY_S):
-		camera.MoveBackward();
-		break;
-	case(GLFW_KEY_D):
-		camera.StrafeRight();
-		break;
-	case(GLFW_KEY_R):
-		camera.MoveUp();
-		break;
-	case(GLFW_KEY_F):
-		camera.MoveDown();
-		break;
-	}
+	camera.MouseUpdate(glm::vec2((xpos - halfWidth), (ypos - halfHeight)));
 }
 
 int main(int argc, char* argv[])
 {
-	Window window("Superb Window", 1280, 720);
-	window.WindowInit();
-	window.SetIcon("rsc\\icon.png", 64);
-	window.OpenGLInit();
+	Window window("Luc, why are you looking here?", 1280, 720, &camera);
+	window.WindowSetIcon("rsc\\icon.png", 64);
 
-	sendDataToOpenGL();
+	window.SetCursorPosCallback(CursorPositionCallback);
+
+	SendDataToOpenGL();
 	GLuint programID = ShaderProgram();
 
-	window.SetCursorPosCallback(cursor_position_callback);
-	window.SetKeyCallback(key_callback);
+	fullTransformationUniformLocation - glGetUniformLocation(programID, "fullTransformMatrix");
+
 
 	while (window.WindowOpen())
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glClearColor(+0.0f, +0.0f, +0.0f, +1.0f);
 
-		int currWidth, currHeight;
-		window.WindowGetSize(currWidth, currHeight);
-		glm::mat4 projectionMatrix = glm::perspective(glm::radians(75.0f), (float)currWidth / (float)currHeight, 0.1f, 10.0f);
-		glm::mat4 fullTransforms[] =
-		{
-			projectionMatrix * camera.GetWorldToViewMatrix() * glm::translate(glm::vec3(-1.0f, 0.0f, -3.0f)) * glm::rotate(glm::radians(36.0f), glm::vec3(1.0f, 0.0f, 0.0f)),
-			projectionMatrix * camera.GetWorldToViewMatrix() * glm::translate(glm::vec3(1.0f, 0.0f, -3.75f)) * glm::rotate(glm::radians(126.0f), glm::vec3(0.0f, 1.0f, 0.0f))
-		}; 
-		glBufferData(GL_ARRAY_BUFFER, sizeof(fullTransforms), fullTransforms, GL_DYNAMIC_DRAW);
+		glm::mat4 fullTransformMatrix;
+		glm::mat4 viewToProjectionMatrix = glm::perspective(glm::radians(60.0f), window.WindowAspectRatio(), 0.1f, 10.0f);
+		glm::mat4 worldToViewMatrix = camera.GetWorldToViewMatrix();
+		glm::mat4 worldToProjectionMatrix = viewToProjectionMatrix * worldToViewMatrix;
 
-		glDrawElementsInstanced(GL_TRIANGLES, numIndices, GL_UNSIGNED_SHORT, 0, 2);
+		glm::mat4 cube1ModelToWorldMatrix =
+			glm::translate(glm::vec3(-1.0f, 0.0f, -3.0f)) *
+			glm::rotate(glm::radians(36.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 
-//		glDrawElements(GL_TRIANGLES, numIndices, GL_UNSIGNED_SHORT, 0);
+		fullTransformMatrix = worldToProjectionMatrix * cube1ModelToWorldMatrix;
+		glUniformMatrix4fv(fullTransformationUniformLocation, 1, GL_FALSE, &fullTransformMatrix[0][0]);
+		glDrawElements(GL_TRIANGLES, cubeNumIndices, GL_UNSIGNED_SHORT, 0);
+
+		glm::mat4 cube2ModelToWorldMatrix =
+			glm::translate(glm::vec3(1.0f, 0.0f, -3.75f)) *
+			glm::rotate(glm::radians(127.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		fullTransformMatrix = worldToProjectionMatrix * cube2ModelToWorldMatrix;
+		glUniformMatrix4fv(fullTransformationUniformLocation, 1, GL_FALSE, &fullTransformMatrix[0][0]);
+		glDrawElements(GL_TRIANGLES, cubeNumIndices, GL_UNSIGNED_SHORT, 0);
+
+
+		glm::mat4 arrowModelToWorldMatrix = glm::translate(glm::vec3(0.0f, 0.0f, -3.0f));
+		fullTransformMatrix = worldToProjectionMatrix * arrowModelToWorldMatrix;
+		glUniformMatrix4fv(fullTransformationUniformLocation, 1, GL_FALSE, &fullTransformMatrix[0][0]);
+		glDrawElements(GL_TRIANGLES, arrowNumIndices, GL_UNSIGNED_SHORT, 0);
 
 		window.WindowUpdate();
 	}

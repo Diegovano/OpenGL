@@ -12,7 +12,7 @@ class Camera
 
 public:
 	Camera();
-	void mouseUpdate(const glm::vec2& newMousePosition);
+	void MouseUpdate(const glm::vec2& newMousePosition);
 	glm::mat4 GetWorldToViewMatrix() const;
 
 public: //move functions
@@ -25,4 +25,3 @@ public: //move functions
 	void MoveDown();
 
 };
-

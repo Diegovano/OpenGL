@@ -1,6 +1,16 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "Window.h"
 
+void Window::PollKeys(Camera* cam)
+{
+	if (glfwGetKey(m_glfwWindow, GLFW_KEY_W)) cam->MoveForward();
+	if (glfwGetKey(m_glfwWindow, GLFW_KEY_A)) cam->StrafeLeft();
+	if (glfwGetKey(m_glfwWindow, GLFW_KEY_S)) cam->MoveBackward();
+	if (glfwGetKey(m_glfwWindow, GLFW_KEY_D)) cam->StrafeRight();
+	if (glfwGetKey(m_glfwWindow, GLFW_KEY_R)) cam->MoveUp();
+	if (glfwGetKey(m_glfwWindow, GLFW_KEY_F)) cam->MoveDown();
+}
+
 void Window::WindowInit(void)
 {
 	m_glfwWindow = glfwCreateWindow(m_width, m_height, m_name, 0, 0);
@@ -28,7 +38,7 @@ void Window::OpenGLInit(void)
 	glEnable(GL_DEPTH_TEST);
 }
 
-void Window::SetIcon(const char* path, unsigned int size)
+void Window::WindowSetIcon(const char* path, unsigned int size)
 {
 	GLFWimage images[1];
 	images[0].height = size;
@@ -51,6 +61,7 @@ void Window::WindowUpdate(void)
 	glViewport(0, 0, m_width, m_height);
 	glfwSwapBuffers(m_glfwWindow);
 	glfwPollEvents();
+	PollKeys(m_cam);
 }
 
 void Window::WindowDestroy(void)
@@ -71,4 +82,9 @@ void Window::SetCursorPosCallback(GLFWcursorposfun cbfun)
 void Window::SetKeyCallback(GLFWkeyfun cbfun)
 {
 	glfwSetKeyCallback(m_glfwWindow, cbfun);
+}
+
+const float Window::WindowAspectRatio()
+{
+	return m_aspectRatio;
 }
