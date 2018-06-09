@@ -125,7 +125,6 @@
   <ItemGroup>
     <ClCompile Include="src\cam\Camera.cpp" />
     <ClCompile Include="src\abs\GLabs.cpp" />
-    <ClCompile Include="src\geo\ShapeData.cpp" />
     <ClCompile Include="src\geo\ShapeGenerator.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Window\Window.cpp" />

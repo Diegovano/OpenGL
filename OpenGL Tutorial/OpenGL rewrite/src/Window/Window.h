@@ -11,7 +11,7 @@ private:
 
 	const char* m_name;
 	unsigned int m_height, m_width;
-	double m_aspectRatio;
+	float m_aspectRatio;
 	GLFWwindow* m_glfwWindow;
 	Camera *m_cam;
 

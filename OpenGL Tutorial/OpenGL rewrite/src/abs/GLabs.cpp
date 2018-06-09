@@ -106,3 +106,18 @@ const GLuint GLabs::ShaderProgram::ProgramID() const
 {
 	return m_programID;
 }
+
+const GLuint GLabs::VertexArray::ReturnID()
+{
+	return m_vertexArrayID;
+}
+
+void GLabs::VertexArray::Bind()
+{
+	glBindVertexArray(m_vertexArrayID);
+}
+
+void GLabs::VertexArray::Unbind()
+{
+	glBindVertexArray(0);
+}

@@ -24,9 +24,6 @@
     <ClCompile Include="src\geo\ShapeGenerator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\geo\ShapeData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\cam\Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

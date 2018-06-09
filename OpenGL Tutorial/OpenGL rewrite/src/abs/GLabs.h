@@ -77,4 +77,19 @@ namespace GLabs
 		void CleanUp();
 		const GLuint ProgramID() const;
 	};
+
+	class VertexArray
+	{
+		GLuint m_vertexArrayID;
+
+	public:
+		VertexArray()
+		{
+			glGenVertexArrays(1, &m_vertexArrayID);
+		}
+
+		const GLuint ReturnID();
+		void Bind();
+		static void Unbind();
+	};
 }

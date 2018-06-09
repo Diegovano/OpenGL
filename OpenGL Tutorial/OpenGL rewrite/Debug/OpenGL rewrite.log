@@ -1,7 +1,4 @@
-﻿  Window.cpp
-d:\program files (x86)\msdev\opengl\opengl tutorial\opengl rewrite\src\window\window.cpp(89): warning C4244: 'return': conversion from 'double' to 'const float', possible loss of data
-  Camera.cpp
+﻿  GLabs.cpp
   main.cpp
-d:\program files (x86)\msdev\opengl\opengl tutorial\opengl rewrite\src\main.cpp(107): warning C4552: '-': result of expression not used
   Generating Code...
   OpenGL rewrite.vcxproj -> D:\Program Files (x86)\msdev\OpenGL\OpenGL Tutorial\Debug\OpenGL rewrite.exe
