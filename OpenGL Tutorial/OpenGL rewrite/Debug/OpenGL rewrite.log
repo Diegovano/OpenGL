@@ -1,4 +1,5 @@
-﻿  GLabs.cpp
+﻿  Window.cpp
+  GLabs.cpp
   main.cpp
   Generating Code...
   OpenGL rewrite.vcxproj -> D:\Program Files (x86)\msdev\OpenGL\OpenGL Tutorial\Debug\OpenGL rewrite.exe

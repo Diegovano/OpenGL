@@ -40,7 +40,6 @@ void Window::OpenGLInit(void)
 	Log("GLEW initialised.");
 	glEnable(GL_DEPTH_TEST);
 	SendDataToOpenGL();
-	SetupVertexArrays();
 }
 
 void Window::WindowSetIcon(const char* path, unsigned int size)

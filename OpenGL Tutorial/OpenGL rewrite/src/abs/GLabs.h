@@ -25,9 +25,15 @@ namespace GLabs
 			Bind(bindPoint);
 			glBufferData(bindPoint, size, data, usage);
 		}
+		void Reserve(GLenum bindPoint, uint32_t size, GLenum usage) //Reserve buffer space but don't fill it
+		{
+			Bind(bindPoint);
+			glBufferData(bindPoint, size, 0, usage);
+		}
 		template<typename _Ty>
 		void SubData(GLenum bindPoint, uint32_t offset, uint32_t size, _Ty* data)
 		{
+			Bind(bindPoint);
 			glBufferSubData(bindPoint, offset, size, data);
 		}
 		const GLuint BufferID();
