@@ -33,4 +33,5 @@ public:
 	static ShapeData MakeArrow();
 	static ShapeData MakePlane(glm::uint dimensions = 10);
 	static ShapeData MakeTeapot(glm::uint tesselation = 10, const glm::mat4& lidTransform = glm::mat4(1));
+	static ShapeData GenerateNormals(const ShapeData& data);
 };
