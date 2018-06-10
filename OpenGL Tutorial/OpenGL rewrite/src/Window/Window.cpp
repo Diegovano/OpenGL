@@ -2,7 +2,6 @@
 #include "Window.h"
 
 extern void SendDataToOpenGL();
-extern void SetupVertexArrays();
 
 void Window::PollKeys(Camera* cam)
 {
