@@ -1,10 +1,15 @@
 #version 330 core
 
-in vec3 pass_vertex_colour;
+in vec3 theNormal;
+in vec3 thePosition;
+
+uniform vec3 lightPosition;
 
 out vec4 final_fragment_colour;
 
 void main()
 {
-	final_fragment_colour = vec4(pass_vertex_colour.r, pass_vertex_colour.g, pass_vertex_colour.b, 1.0f);
+	vec3 lightVector = normalize(lightPosition - thePosition);
+	float brightness = dot(lightVector, theNormal);
+	final_fragment_colour = vec4(brightness, brightness, brightness, 1.0f);
 }

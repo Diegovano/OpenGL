@@ -84,6 +84,8 @@
     <Link>
       <AdditionalLibraryDirectories>$(SolutionDir)OpenGL rewrite/Dependencies/GLFW/lib-vc2015;$(SolutionDir)OpenGL rewrite/Dependencies/GLEW/lib/Release/Win32</AdditionalLibraryDirectories>
       <AdditionalDependencies>glfw3.lib;glew32s.lib;opengl32.lib;User32.lib;Gdi32.lib;Shell32.lib</AdditionalDependencies>
+      <SubSystem>
+      </SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
