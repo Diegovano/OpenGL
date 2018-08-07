@@ -1,5 +1,6 @@
 #include "chessCore.h"
 
+
 void ChessGame::BoardRender()
 {
 	GeometryData bSquare = GeometryGenerator::GetSquare();
@@ -46,9 +47,7 @@ void ChessGame::BoardRender()
 	glDrawElementsInstanced(GL_TRIANGLES, bSquare.numIndices, GL_UNSIGNED_SHORT, (void*)bSquare.VertexBufferSize(), 32);
 
 	bSquare.CleanUp();
-
 }
-
 
 void ChessGame::ChessInitialise()
 {

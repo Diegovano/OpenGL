@@ -2,10 +2,10 @@
 #include <GLEW/include/GL/glew.h>
 #include "../GLChess/src/Abstraction/GLabs.h"
 
-GLabs::ShaderProgram ShaderProgram()
+GLabs::ShaderProgram SpriteShaderProgram()
 {
-	std::ifstream vshFileStream("D:\\Program Files (x86)\\msdev\\OpenGL\\GLChess\\GLChess\\rsc\\Shader\\vsh.shader");
-	std::ifstream fshFileStream("D:\\Program Files (x86)\\msdev\\OpenGL\\GLChess\\GLChess\\rsc\\Shader\\fsh.shader");
+	std::ifstream vshFileStream("D:\\Program Files (x86)\\msdev\\OpenGL\\GLChess\\GLChess\\rsc\\Shader\\SpriteShaders\\spriteVsh.shader");
+	std::ifstream fshFileStream("D:\\Program Files (x86)\\msdev\\OpenGL\\GLChess\\GLChess\\rsc\\Shader\\SpriteShaders\\spriteFsh.shader");
 
 	std::string strVertexShader = std::string(std::istreambuf_iterator<char>(vshFileStream), std::istreambuf_iterator<char>());
 	std::string strFragmentShader = std::string(std::istreambuf_iterator<char>(fshFileStream), std::istreambuf_iterator<char>());
@@ -20,17 +20,16 @@ GLabs::ShaderProgram ShaderProgram()
 
 	VertexShader.Compile();
 	FragmentShader.Compile();
-	
-	GLabs::ShaderProgram Program;
 
-	Program.AttachShader(VertexShader);
-	Program.AttachShader(FragmentShader);
+	GLabs::ShaderProgram SpriteShaderProgram;
 
-	Program.Link();
-	Program.UseProgram();
+	SpriteShaderProgram.AttachShader(VertexShader);
+	SpriteShaderProgram.AttachShader(FragmentShader);
+
+	SpriteShaderProgram.Link();
 
 	VertexShader.Delete();
 	FragmentShader.Delete();
 
-	return Program;
+	return SpriteShaderProgram;
 }

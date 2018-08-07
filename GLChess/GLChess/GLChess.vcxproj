@@ -80,8 +80,8 @@
       <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);GLEW_STATIC;GLM_ENABLE_EXPERIMENTAL</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\GLFW\lib-vc2015;$(SolutionDir)Dependencies\GLEW\lib\Release\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies);glfw3.lib;glew32s.lib;opengl32.lib;User32.lib;Gdi32.lib;Shell32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\SOIL\lib;$(SolutionDir)Dependencies\GLFW\lib-vc2015;$(SolutionDir)Dependencies\GLEW\lib\Release\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libSoil.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies);glfw3.lib;glew32s.lib;opengl32.lib;User32.lib;Gdi32.lib;Shell32.lib</AdditionalDependencies>
       <SubSystem>
       </SubSystem>
     </Link>
@@ -124,26 +124,46 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="rsc\Shader\ShaderProgram.cpp" />
+    <ClCompile Include="rsc\Shader\SpriteShaders\SpriteShaderProgram.cpp" />
+    <ClCompile Include="src\Abstraction\2DTexture\2DTexture.cpp" />
     <ClCompile Include="src\Abstraction\GLabs.cpp" />
     <ClCompile Include="src\ChessCore\chessCore.cpp" />
     <ClCompile Include="src\Geometry\GeometryGenerator.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Texture Loader\textureLoader.cpp" />
     <ClCompile Include="src\Window\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Abstraction\2DTexture\2DTexture.h" />
     <ClInclude Include="src\Abstraction\GLabs.h" />
     <ClInclude Include="src\ChessCore\chessCore.h" />
     <ClInclude Include="src\Geometry\GeometryGenerator.h" />
     <ClInclude Include="src\Geometry\GeometryData.h" />
     <ClInclude Include="src\Geometry\Vertex.h" />
     <ClInclude Include="src\logger.h" />
+    <ClInclude Include="src\Texture Loader\textureLoader.h" />
     <ClInclude Include="src\Window\Window.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="rsc\icon.png" />
+    <Image Include="rsc\Sprites\bb.png" />
+    <Image Include="rsc\Sprites\bk.png" />
+    <Image Include="rsc\Sprites\bn.png" />
+    <Image Include="rsc\Sprites\bp.png" />
+    <Image Include="rsc\Sprites\bq.png" />
+    <Image Include="rsc\Sprites\br.png" />
+    <Image Include="rsc\Sprites\ChessPiecesArray.png" />
+    <Image Include="rsc\Sprites\wb.png" />
+    <Image Include="rsc\Sprites\wk.png" />
+    <Image Include="rsc\Sprites\wn.png" />
+    <Image Include="rsc\Sprites\wp.png" />
+    <Image Include="rsc\Sprites\wq.png" />
+    <Image Include="rsc\Sprites\wr.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="rsc\Shader\fsh.shader" />
+    <None Include="rsc\Shader\SpriteShaders\spriteFsh.shader" />
+    <None Include="rsc\Shader\SpriteShaders\spriteVsh.shader" />
     <None Include="rsc\Shader\vsh.shader" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

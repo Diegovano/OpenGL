@@ -2,14 +2,14 @@
 #include "Window/Window.h"
 #include "ChessCore/chessCore.h"
 
-extern GLuint ShaderProgram();
+extern GLabs::ShaderProgram ShaderProgram();
 
 int main(int argc, char* argv[])
 {
 	Window mainWindow("GLChess", 720, 720);
 	mainWindow.WindowSetIcon("rsc\\icon.png", 64);
 
-	GLuint programID = ShaderProgram();
+	ShaderProgram();
 
 	while (mainWindow.WindowOpen())
 	{

@@ -33,6 +33,15 @@
     <ClCompile Include="rsc\Shader\ShaderProgram.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\Abstraction\2DTexture\2DTexture.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Texture Loader\textureLoader.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="rsc\Shader\SpriteShaders\SpriteShaderProgram.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Window\Window.h">
@@ -56,14 +65,61 @@
     <ClInclude Include="src\Geometry\GeometryData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Abstraction\2DTexture\2DTexture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Texture Loader\textureLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="rsc\icon.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="rsc\Sprites\ChessPiecesArray.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="rsc\Sprites\bb.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="rsc\Sprites\bk.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="rsc\Sprites\bn.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="rsc\Sprites\bp.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="rsc\Sprites\bq.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="rsc\Sprites\br.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="rsc\Sprites\wb.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="rsc\Sprites\wk.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="rsc\Sprites\wn.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="rsc\Sprites\wp.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="rsc\Sprites\wq.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="rsc\Sprites\wr.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="rsc\Shader\vsh.shader" />
     <None Include="rsc\Shader\fsh.shader" />
+    <None Include="rsc\Shader\SpriteShaders\spriteFsh.shader" />
+    <None Include="rsc\Shader\SpriteShaders\spriteVsh.shader" />
   </ItemGroup>
 </Project>
