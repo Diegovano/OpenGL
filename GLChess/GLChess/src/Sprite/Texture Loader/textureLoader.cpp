@@ -30,5 +30,6 @@ GLabs::Texture TextureLoader::LoadTextureFromFile(const GLchar* p_file, GLboolea
 	unsigned char* image = stbi_load(p_file, &width, &height, 0, texture.imageFormat == GL_RGBA ? 4 : 3);
 	texture.Generate(width, height, image);
 	stbi_image_free(image);
+	Log("Loaded Texture");
 	return texture;
 }

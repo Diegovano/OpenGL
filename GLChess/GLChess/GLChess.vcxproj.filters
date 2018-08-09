@@ -36,10 +36,16 @@
     <ClCompile Include="src\Abstraction\2DTexture\2DTexture.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\Texture Loader\textureLoader.cpp">
+    <ClCompile Include="rsc\Shader\SpriteShaders\SpriteShaderProgram.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="rsc\Shader\SpriteShaders\SpriteShaderProgram.cpp">
+    <ClCompile Include="src\Sprite\Texture Loader\textureLoader.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Sprite\Sprite Renderer\SpriteRenderer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Chess Board\ChessBoard.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -68,7 +74,13 @@
     <ClInclude Include="src\Abstraction\2DTexture\2DTexture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Texture Loader\textureLoader.h">
+    <ClInclude Include="src\Sprite\Texture Loader\textureLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Sprite\Sprite Renderer\SpriteRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Chess Board\ChessBoard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

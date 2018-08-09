@@ -1,5 +1,3 @@
- #include <iostream>
-#include <GLEW/include/GL/glew.h>
 #include "GLabs.h"
 
 
@@ -8,6 +6,10 @@ void GLabs::Buffer::Bind(GLenum bindPoint)
 {
 	glBindBuffer(bindPoint, m_bufferID);
 	m_bindPoint = bindPoint;
+}
+void GLabs::Buffer::Unbind()
+{
+	glBindBuffer(m_bindPoint, 0);
 }
 const GLuint GLabs::Buffer::BufferID()
 {

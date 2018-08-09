@@ -9,5 +9,5 @@ uniform mat4 full_transform_matrix;
 void main()
 {
 	texture_coords = vertex.zw;
-	gl_Position = full_transform_matrix * vec4(vertex.xy, 0.0f, 1.0f);
+	gl_Position = full_transform_matrix * vec4(vertex.xy, -0.5f, 1.0f);
 }

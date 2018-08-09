@@ -1,8 +1,9 @@
 #pragma once
-#include "../Abstraction/2DTexture/2DTexture.h"
+#include "../../Abstraction/2DTexture/2DTexture.h"
 #include <map>
 #include <GLEW/include/GL/glew.h>
 #include <stb-master/stb_image.h>
+#include "../../logger.h"
 
 class TextureLoader
 {

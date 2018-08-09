@@ -10,13 +10,15 @@ int main(int argc, char* argv[])
 	mainWindow.WindowSetIcon("rsc\\icon.png", 64);
 
 	ShaderProgram();
+	ChessGame game;
 
 	while (mainWindow.WindowOpen())
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glClearColor(91/255.0f, 54/255.0f, 36/255.0f, +1.0f);
 
-		ChessGame::BoardRender();
+		game.BoardRender();
+		game.ChessRender();
 
 		mainWindow.WindowUpdate();
 	}

@@ -1,5 +1,7 @@
 #pragma once
 #include "../logger.h"
+#include <iostream>
+#include <GLEW/include/GL/glew.h>
 
 namespace GLabs
 {
@@ -19,6 +21,7 @@ namespace GLabs
 		~Buffer() { }
 
 		void Bind(GLenum bindPoint);
+		void Unbind();
 		template<typename _Ty>
 		void Data(GLenum bindPoint, uint32_t size, _Ty* data, GLenum usage)
 		{
