@@ -1,14 +1,14 @@
 #include "textureLoader.h"
 
-std::map<std::string, GLabs::Texture> TextureLoader::Textures;
+std::map<PieceName, GLabs::Texture> TextureLoader::Textures;
 
-GLabs::Texture TextureLoader::LoadTexture(const GLchar* p_file, GLboolean p_alpha, std::string p_name)
+GLabs::Texture TextureLoader::LoadTexture(const GLchar* p_file, GLboolean p_alpha, PieceName p_name)
 {
 	Textures[p_name] = LoadTextureFromFile(p_file, p_alpha);
 	return Textures[p_name];
 }
 
-GLabs::Texture TextureLoader::GetTexture(std::string p_name)
+GLabs::Texture TextureLoader::GetTexture(PieceName p_name)
 {
 	return Textures[p_name];
 }

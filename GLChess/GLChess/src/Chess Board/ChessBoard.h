@@ -1,7 +1,7 @@
 #pragma once
 #include <glm/glm.hpp>
 
-enum PositionNames
+enum PositionName
 {
 	a1 = 11,
 	a2 = 12,
@@ -71,5 +71,5 @@ enum PositionNames
 
 struct ChessBoard
 {
-	static glm::vec2 GetPosition(PositionNames p_position);
+	static glm::vec2 GetPosition(PositionName p_position);
 };

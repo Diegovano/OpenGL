@@ -48,6 +48,9 @@
     <ClCompile Include="src\Chess Board\ChessBoard.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\Piece Manager\PieceManager.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Window\Window.h">
@@ -81,6 +84,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Chess Board\ChessBoard.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Piece Manager\PieceManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
