@@ -70,8 +70,8 @@ public:
 		{
 			for (unsigned int iter = 0; iter < amountPieces; iter++)
 			{
-//				if (abs(name) != WP) position[iter] += 8;
-//				else position[iter] += 6; //pawns are on different ranks
+				if (abs(name) != WP) position[iter] = static_cast<PositionName>(position[iter] + 7);
+				else position[iter] = static_cast<PositionName>(position[iter] + 5); //pawns are on different ranks
 			}
 		}
 	}
