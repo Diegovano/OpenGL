@@ -4,6 +4,15 @@
 #include "../Sprite/Texture Loader/textureLoader.h"
 #include <vector>
 
+#ifdef _DEBUG
+#define DBG_NEW new ( _CLIENT_BLOCK , __FILE__ , __LINE__ )
+// Replace _NORMAL_BLOCK with _CLIENT_BLOCK if you want the
+// allocations to be of _CLIENT_BLOCK type
+#else
+#define DBG_NEW new
+#endif
+
+
 enum PieceName
 {
 	WK = 1,
@@ -22,7 +31,7 @@ enum PieceName
 
 class Piece //if unclear: refering to type of piece, not individual piece, one Piece obj for all pawns etc..
 {
-	PositionName* position;
+	PositionName position[8];
 	PieceName name;
 	bool isWhite;
 	bool isMoved;
@@ -32,30 +41,30 @@ public:
 	{
 		switch (abs(name))
 		{
-		case(WK): position = new PositionName[1];
+		case(WK):
 			position[0] = e1; //All Kings because of abs(name), all queens etc...
 			amountPieces = 1;
 			break;
-		case(WQ): position = new PositionName[1];
+		case(WQ): 
 			position[0] = d1;
 			amountPieces = 1;
 			break;
-		case(WB): position = new PositionName[2];
+		case(WB):
 			position[0] = c1;
 			position[1] = f1;
 			amountPieces = 2;
 			break;
-		case(WN): position = new PositionName[2];
+		case(WN):
 			position[0] = b1;
 			position[1] = g1;
 			amountPieces = 2;
 			break;
-		case(WR): position = new PositionName[2];
+		case(WR):
 			position[0] = a1;
 			position[1] = h1;
 			amountPieces = 2;
 			break;
-		case(WP): position = new PositionName[8];
+		case(WP):
 			position[0] = a2;
 			position[1] = b2;
 			position[2] = c2;

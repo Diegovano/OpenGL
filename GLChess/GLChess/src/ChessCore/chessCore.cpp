@@ -4,9 +4,6 @@ void ChessGame::BoardRender()
 {
 	m_program.UseProgram();
 
-	GeometryData bSquare = GeometryGenerator::GetSquare();
-	GeometryData bigSquare = GeometryGenerator::GetWhiteSquareBack();
-
 	GLabs::Buffer whiteSquareBuffer;
 	whiteSquareBuffer.Reserve(GL_ELEMENT_ARRAY_BUFFER, bigSquare.TotalBufferSize(), GL_STATIC_DRAW);
 	whiteSquareBuffer.SubData(GL_ARRAY_BUFFER, 0, bigSquare.VertexBufferSize(), bigSquare.vertices);
@@ -47,7 +44,6 @@ void ChessGame::BoardRender()
 
 	glDrawElementsInstanced(GL_TRIANGLES, bSquare.numIndices, GL_UNSIGNED_SHORT, (void*)bSquare.VertexBufferSize(), 32);
 
-	bSquare.CleanUp();
 }
 
 void ChessGame::ChessInitialise()
