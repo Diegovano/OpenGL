@@ -22,7 +22,6 @@ int main(int argc, char* argv[])
 
 		mainWindow.WindowUpdate();
 	}
-	_CrtDumpMemoryLeaks();
 	mainWindow.WindowDestroy();
 	return 0;
 }

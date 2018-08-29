@@ -1,6 +1,6 @@
 #include "chessCore.h"
 
-/*GLabs::Buffer ChessGame::BoardAlloc()
+void ChessGame::BoardRender()
 {
 	m_program.UseProgram();
 
@@ -41,17 +41,13 @@
 	glEnableVertexAttribArray(2);
 	glEnableVertexAttribArray(3);
 	glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, 0, nullptr);
-	glVertexAttribPointer(3, 1, GL_FLOAT, GL_FALSE, 0, (void*)(32*sizeof(float)));
+	glVertexAttribPointer(3, 1, GL_FLOAT, GL_FALSE, 0, (void*)(sizeof(xOffsets)));
 	glVertexAttribDivisor(2, 1);
 	glVertexAttribDivisor(3, 4);
 
 	glDrawElementsInstanced(GL_TRIANGLES, bSquare.numIndices, GL_UNSIGNED_SHORT, (void*)bSquare.VertexBufferSize(), 32);
 
-} */
-
-void ChessGame::BoardRender()
-{
-	m_board.BoardRender();
+	bSquare.CleanUp();
 }
 
 void ChessGame::ChessInitialise()

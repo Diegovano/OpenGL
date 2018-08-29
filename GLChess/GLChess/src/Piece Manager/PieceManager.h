@@ -22,7 +22,7 @@ enum PieceName
 
 class Piece //if unclear: refering to type of piece, not individual piece, one Piece obj for all pawns etc..
 {
-	PositionName position[8];
+	PositionName* position;
 	PieceName name;
 	bool isWhite;
 	bool isMoved;
@@ -32,30 +32,30 @@ public:
 	{
 		switch (abs(name))
 		{
-		case(WK):
+		case(WK): position = new PositionName[1];
 			position[0] = e1; //All Kings because of abs(name), all queens etc...
 			amountPieces = 1;
 			break;
-		case(WQ): 
+		case(WQ): position = new PositionName[1];
 			position[0] = d1;
 			amountPieces = 1;
 			break;
-		case(WB):
+		case(WB): position = new PositionName[2];
 			position[0] = c1;
 			position[1] = f1;
 			amountPieces = 2;
 			break;
-		case(WN):
+		case(WN): position = new PositionName[2];
 			position[0] = b1;
 			position[1] = g1;
 			amountPieces = 2;
 			break;
-		case(WR):
+		case(WR): position = new PositionName[2];
 			position[0] = a1;
 			position[1] = h1;
 			amountPieces = 2;
 			break;
-		case(WP):
+		case(WP): position = new PositionName[8];
 			position[0] = a2;
 			position[1] = b2;
 			position[2] = c2;
