@@ -43,8 +43,7 @@ GeometryData GeometryGenerator::GetWhiteSquareBack()
 GeometryData GeometryGenerator::GetSquare()
 {
 	GeometryData ret;
-	glm::vec3 squareColour = //glm::vec3(+152.0f, +103.0f, 68.0f);
-		glm::vec3(0, 0, 0);
+	glm::vec3 squareColour = glm::vec3(+152.0f, +103.0f, 68.0f);
 	squareColour /= 255;
 
 	Vertex square[]

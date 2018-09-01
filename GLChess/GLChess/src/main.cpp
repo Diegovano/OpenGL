@@ -18,7 +18,7 @@ int main(int argc, char* argv[])
 		glClearColor(91/255.0f, 54/255.0f, 36/255.0f, +1.0f);
 
 		game.BoardRender();
-		game.ChessRender();
+//		game.ChessRender();
 
 		mainWindow.WindowUpdate();
 	}

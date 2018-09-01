@@ -19,6 +19,8 @@ void ChessGame::BoardRender()
 
 	glDrawElements(GL_TRIANGLES, bigSquare.numIndices, GL_UNSIGNED_SHORT, (void*)bigSquare.VertexBufferSize());
 
+	whiteSquareBuffer.DeleteBuffer();
+
 	GLabs::Buffer blackSquareBuffer;
 	blackSquareBuffer.Reserve(GL_ARRAY_BUFFER, bSquare.TotalBufferSize(), GL_STATIC_DRAW);
 	blackSquareBuffer.SubData(GL_ARRAY_BUFFER, 0, bSquare.VertexBufferSize(), bSquare.vertices);
@@ -45,9 +47,13 @@ void ChessGame::BoardRender()
 	glVertexAttribDivisor(2, 1);
 	glVertexAttribDivisor(3, 4);
 
-	glDrawElementsInstanced(GL_TRIANGLES, bSquare.numIndices, GL_UNSIGNED_SHORT, (void*)bSquare.VertexBufferSize(), 32);
+	glDrawElementsInstanced(GL_TRIANGLES, bSquare.numIndices, GL_UNSIGNED_SHORT, (void*)bSquare.VertexBufferSize(), 32); 
 
-	bSquare.CleanUp();
+	blackSquareBuffer.DeleteBuffer();
+	offsetsBuffer.DeleteBuffer();
+
+	bSquare.CleanUp(); 
+	bigSquare.CleanUp();
 }
 
 void ChessGame::ChessInitialise()
@@ -76,6 +82,5 @@ void ChessGame::GetSprites()
 
 void ChessGame::ChessRender()
 {
-	BoardRender();
 	m_pieces.RenderAll(m_renderer);
 }

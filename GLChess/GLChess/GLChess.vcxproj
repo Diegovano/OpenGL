@@ -127,7 +127,6 @@
     <ClCompile Include="rsc\Shader\SpriteShaders\SpriteShaderProgram.cpp" />
     <ClCompile Include="src\Abstraction\2DTexture\2DTexture.cpp" />
     <ClCompile Include="src\Abstraction\GLabs.cpp" />
-    <ClCompile Include="src\Board Renderer\BoardRenderer.cpp" />
     <ClCompile Include="src\Chess Board\ChessBoard.cpp" />
     <ClCompile Include="src\ChessCore\chessCore.cpp" />
     <ClCompile Include="src\Geometry\GeometryGenerator.cpp" />
@@ -138,7 +137,6 @@
     <ClCompile Include="src\Window\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Board Renderer\BoardRenderer.h" />
     <ClInclude Include="src\Chess Board\ChessBoard.h" />
     <ClInclude Include="src\Piece Manager\PieceManager.h" />
     <ClInclude Include="src\Sprite\Sprite Renderer\SpriteRenderer.h" />
