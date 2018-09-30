@@ -4,6 +4,8 @@
 #include "../Sprite/Texture Loader/textureLoader.h"
 #include <vector>
 
+extern glm::vec2** Board;
+
 enum PieceName
 {
 	WK = 1,
@@ -20,9 +22,17 @@ enum PieceName
 	BP = -6,
 };
 
+enum Direction
+{
+	UP = 1,
+	DN = -1,
+	RT = 10,
+	LF = -10
+};
+
 class Piece //if unclear: refering to type of piece, not individual piece, one Piece obj for all pawns etc..
 {
-	PositionName* position;
+	glm::vec2* position;
 	PieceName name;
 	bool isWhite;
 	bool isMoved;
@@ -30,53 +40,85 @@ class Piece //if unclear: refering to type of piece, not individual piece, one P
 public:
 	Piece(PieceName p_name) : name(p_name), isWhite(name < 0 ? false : true), isMoved(false)
 	{
-		switch (abs(name))
+		switch (abs(name)) //All Kings because of abs(name), all queens etc...
 		{
-		case(WK): position = new PositionName[1];
-			position[0] = e1; //All Kings because of abs(name), all queens etc...
+		case(WK): position = new glm::vec2[1];
+			if (name == WK) position[0] = Board[4][0];
+			else position[0] = Board[4][7]; 
 			amountPieces = 1;
 			break;
-		case(WQ): position = new PositionName[1];
-			position[0] = d1;
+		case(WQ): position = new glm::vec2[1];
+			if (name == WQ) position[0] = Board[3][0];
+			else position[0] = Board[3][7];
 			amountPieces = 1;
 			break;
-		case(WB): position = new PositionName[2];
-			position[0] = c1;
-			position[1] = f1;
-			amountPieces = 2;
-			break;
-		case(WN): position = new PositionName[2];
-			position[0] = b1;
-			position[1] = g1;
-			amountPieces = 2;
-			break;
-		case(WR): position = new PositionName[2];
-			position[0] = a1;
-			position[1] = h1;
-			amountPieces = 2;
-			break;
-		case(WP): position = new PositionName[8];
-			position[0] = a2;
-			position[1] = b2;
-			position[2] = c2;
-			position[3] = d2;
-			position[4] = e2;
-			position[5] = f2;
-			position[6] = g2;
-			position[7] = h2;
-			amountPieces = 8;
-		}
-		if (!isWhite) //For black pieces, move to the other side of the board
-		{
-			for (unsigned int iter = 0; iter < amountPieces; iter++)
+		case(WB): position = new glm::vec2[2];
+			if (name == WB)
 			{
-				if (abs(name) != WP) position[iter] = static_cast<PositionName>(position[iter] + 7);
-				else position[iter] = static_cast<PositionName>(position[iter] + 5); //pawns are on different ranks
+				position[0] = Board[2][0];
+				position[1] = Board[5][0];
 			}
+			else
+			{
+				position[0] = Board[2][7];
+				position[1] = Board[5][7];
+			}
+			amountPieces = 2;
+			break;
+		case(WN): position = new glm::vec2[2];
+			if (name == WN)
+			{
+				position[0] = Board[1][0];
+				position[1] = Board[6][0];
+			}
+			else
+			{
+				position[0] = Board[1][7];
+				position[1] = Board[6][7];
+			}
+			amountPieces = 2;
+			break;
+		case(WR): position = new glm::vec2[2];
+			if (name == WR)
+			{
+				position[0] = Board[0][0];
+				position[1] = Board[7][0];
+			}
+			else
+			{
+				position[0] = Board[0][7];
+				position[1] = Board[7][7];
+			}
+			amountPieces = 2;
+			break;
+		case(WP): position = new glm::vec2[8];
+			if (name == WP)
+			{
+				position[0] = Board[0][1];
+				position[1] = Board[1][1];
+				position[2] = Board[2][1];
+				position[3] = Board[3][1];
+				position[4] = Board[4][1];
+				position[5] = Board[5][1];
+				position[6] = Board[6][1];
+				position[7] = Board[7][1];
+			}
+			else
+			{
+				position[0] = Board[0][6];
+				position[1] = Board[1][6];
+				position[2] = Board[2][6];
+				position[3] = Board[3][6];
+				position[4] = Board[4][6];
+				position[5] = Board[5][6];
+				position[6] = Board[6][6];
+				position[7] = Board[7][6];
+			}
+			amountPieces = 8; 
 		}
 	}
 
-	const PositionName operator[](const unsigned int p_iter) const;
+	const glm::vec2 operator[](const unsigned int p_iter) const;
 
 	const PieceName GetName() const;
 	const bool IsWhite() const;

@@ -1,6 +1,6 @@
 #include "PieceManager.h"
 
-const PositionName Piece::operator[](const unsigned int p_iter) const
+const glm::vec2 Piece::operator[](const unsigned int p_iter) const
 {
 	if (p_iter >= amountPieces)
 	{

@@ -28,3 +28,8 @@ void ChessGame::ChessRender()
 {
 	m_pieces.RenderAll(m_renderer);
 }
+
+/*InputManager* ChessGame::operator=(ChessGame game)
+{
+	return &m_inputManager;
+}*/

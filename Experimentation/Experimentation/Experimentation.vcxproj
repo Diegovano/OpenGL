@@ -124,12 +124,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Abstraction\GLabs.cpp" />
+    <ClCompile Include="Input Manager\InputManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Render Manager\Render Manager.cpp" />
     <ClCompile Include="Window\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Abstraction\GLabs.h" />
+    <ClInclude Include="Input Manager\InputManager.h" />
     <ClInclude Include="logger.h" />
     <ClInclude Include="Render Manager\BufferData.h" />
     <ClInclude Include="Render Manager\Render Manager.h" />

@@ -131,6 +131,7 @@
     <ClCompile Include="src\Chess Board\ChessBoard.cpp" />
     <ClCompile Include="src\ChessCore\chessCore.cpp" />
     <ClCompile Include="src\Geometry\GeometryGenerator.cpp" />
+    <ClCompile Include="src\Input Manager\InputManager.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Piece Manager\PieceManager.cpp" />
     <ClCompile Include="src\Sprite\Sprite Renderer\SpriteRenderer.cpp" />
@@ -140,6 +141,7 @@
   <ItemGroup>
     <ClInclude Include="src\Board Renderer\BoardRenderer.h" />
     <ClInclude Include="src\Chess Board\ChessBoard.h" />
+    <ClInclude Include="src\Input Manager\InputManager.h" />
     <ClInclude Include="src\Piece Manager\PieceManager.h" />
     <ClInclude Include="src\Sprite\Sprite Renderer\SpriteRenderer.h" />
     <ClInclude Include="src\Abstraction\2DTexture\2DTexture.h" />

@@ -1,6 +1,11 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "Window.h"
 
+void Window::SetUserPtr(void* InputHandler)
+{
+	glfwSetWindowUserPointer(m_glfwWindow, InputHandler);
+}
+
 void Window::WindowInit(void)
 {
 	m_glfwWindow = glfwCreateWindow(m_width, m_height, m_name, 0, 0);
@@ -68,6 +73,11 @@ void Window::WindowGetSize(int &width, int &height)
 void Window::SetCursorPosCallback(GLFWcursorposfun cbfun)
 {
 	glfwSetCursorPosCallback(m_glfwWindow, cbfun);
+}
+
+void Window::SetMouseButtonCallback(GLFWmousebuttonfun cbfun)
+{
+	glfwSetMouseButtonCallback(m_glfwWindow, cbfun);
 }
 
 void Window::SetKeyCallback(GLFWkeyfun cbfun)

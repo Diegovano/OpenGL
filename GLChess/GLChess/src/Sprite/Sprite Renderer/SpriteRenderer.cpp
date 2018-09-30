@@ -35,14 +35,14 @@ void SpriteRenderer::InitRenderData()
 	vertexBuffer.Unbind();
 }
 
-void SpriteRenderer::DrawSprite(GLabs::Texture p_texture, PositionName p_position,
+void SpriteRenderer::DrawSprite(GLabs::Texture p_texture, glm::vec2 p_position,
 	glm::vec2 p_size, GLfloat p_rotate,
 	glm::vec3 p_colour)
 {
 	shaderProgram.UseProgram();
 	glm::mat4 fullTransformMatrix(1);
 
-	fullTransformMatrix = glm::translate(fullTransformMatrix, glm::vec3(ChessBoard::GetPosition(p_position), 0.0f));
+	fullTransformMatrix = glm::translate(fullTransformMatrix, glm::vec3(p_position, 0.0f));
 	fullTransformMatrix = glm::rotate(fullTransformMatrix, glm::radians(p_rotate), glm::vec3(0.0f, 0.0f, 1.0f));
 	fullTransformMatrix = glm::translate(fullTransformMatrix, glm::vec3(-0.5f * p_size.x, -0.5f * p_size.y, 0.0f));
 	fullTransformMatrix = glm::scale(fullTransformMatrix, glm::vec3(p_size, 1.0f));

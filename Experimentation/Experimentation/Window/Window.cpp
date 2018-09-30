@@ -69,9 +69,19 @@ void Window::SetCursorPosCallback(GLFWcursorposfun cbfun)
 	glfwSetCursorPosCallback(m_glfwWindow, cbfun);
 }
 
+void Window::SetMouseButtonCallback(GLFWmousebuttonfun cbfun)
+{
+	glfwSetMouseButtonCallback(m_glfwWindow, cbfun);
+}
+
 void Window::SetKeyCallback(GLFWkeyfun cbfun)
 {
 	glfwSetKeyCallback(m_glfwWindow, cbfun);
+}
+
+void Window::SetUserPointer(void* userPtr)
+{
+	glfwSetWindowUserPointer(m_glfwWindow, userPtr);
 }
 
 const float Window::WindowAspectRatio()

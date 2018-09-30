@@ -1,7 +1,6 @@
 #pragma once
 #include "../../Abstraction/GLabs.h"
 #include "../../Abstraction/2DTexture/2DTexture.h"
-#include "../../Chess Board/ChessBoard.h"
 #include <glm/glm.hpp>
 #include <glm/ext.hpp>
 
@@ -19,7 +18,7 @@ public:
 	}
 //	~SpriteRenderer();
 
-	void DrawSprite(GLabs::Texture p_texture, PositionName p_position,
+	void DrawSprite(GLabs::Texture p_texture, glm::vec2 p_position,
 		glm::vec2 p_size = glm::vec2(0.2f, 0.2f), GLfloat p_rotate = 180.0f,
 		glm::vec3 p_colour = glm::vec3(1.0f));
 };

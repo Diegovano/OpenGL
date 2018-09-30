@@ -45,13 +45,16 @@
     <ClCompile Include="src\Sprite\Sprite Renderer\SpriteRenderer.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\Chess Board\ChessBoard.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="src\Piece Manager\PieceManager.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\Board Renderer\BoardRenderer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Input Manager\InputManager.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Chess Board\ChessBoard.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -93,6 +96,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Board Renderer\BoardRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Input Manager\InputManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

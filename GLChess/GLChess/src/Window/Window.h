@@ -30,6 +30,8 @@ public:
 
 public:
 
+	void SetUserPtr(void* InputHandler);
+
 	void WindowInit(void);
 	void OpenGLInit(void);
 	void WindowSetIcon(const char* path, unsigned int size);
@@ -37,7 +39,9 @@ public:
 	void WindowUpdate(void);
 	void WindowDestroy(void);
 	void WindowGetSize(int &width, int &height);
+
 	void SetCursorPosCallback(GLFWcursorposfun cbfun);
+	void SetMouseButtonCallback(GLFWmousebuttonfun cbfun);
 	void SetKeyCallback(GLFWkeyfun cbfun);
 
 public: //getters

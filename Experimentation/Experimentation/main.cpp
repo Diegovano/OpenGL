@@ -2,10 +2,15 @@
 #include "sh/ShaderProgram.h"
 #include "Render Manager/Render Manager.h"
 #include "Vertex.h"
+#include "Input Manager/InputManager.h"
 
 int main(int argc, char* argv[])
 {
 	Window window("Experimentation", 1280, 720);
+
+	InputManager inputManager;
+	window.SetUserPointer(&inputManager);
+	window.SetMouseButtonCallback(inputManager.GetMButtonCallback());
 
 	GLabs::Buffer triangleBuffer;
 
