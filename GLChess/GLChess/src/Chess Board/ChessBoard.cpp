@@ -17,4 +17,17 @@ glm::vec2** AssignBoardCoords()
 	return board;
 }
 
+glm::vec2 GetMovement(int x, int y)
+{
+	return glm::vec2(x*0.2f, y*0.2f);
+}
+ 
+glm::vec2 GetTileCentre(double x, double y)
+{
+	unsigned int xtile = (x + 0.8f) / 0.2f;
+	unsigned int ytile = (y + 0.8f) / 0.2f;
+
+	return Board[xtile][ytile];
+}
+
 glm::vec2** Board(AssignBoardCoords());

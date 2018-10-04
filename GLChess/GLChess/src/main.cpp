@@ -13,7 +13,7 @@ int main(int argc, char* argv[])
 	InputManager inpt;
 	mainWindow.SetUserPtr(&inpt);
 	mainWindow.SetMouseButtonCallback(inpt.GetMButtonCallback());
-	ChessGame game;
+	ChessGame game(&inpt);
 
 	while (mainWindow.WindowOpen())
 	{

@@ -17,10 +17,11 @@ class ChessGame
 	SpriteRenderer *m_renderer;
 	PieceManager m_pieces;
 	BoardRenderer m_board;
+	InputManager m_inputManager;
 	//InputManager m_inputManager;
 public:
-	ChessGame() : moveNo(0), m_program(ShaderProgram()), m_spriteProgram(SpriteShaderProgram()), m_renderer(new SpriteRenderer(m_spriteProgram)),
-		m_board(BoardRenderer::BoardRenderer(m_program))
+	ChessGame(InputManager* inptMgr) : moveNo(0), m_program(ShaderProgram()), m_spriteProgram(SpriteShaderProgram()), m_renderer(new SpriteRenderer(m_spriteProgram)),
+		m_board(BoardRenderer::BoardRenderer(m_program)), m_inputManager(*inptMgr)
 	{
 		GetSprites();
 	}
