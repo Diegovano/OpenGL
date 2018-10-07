@@ -127,9 +127,9 @@ public:
 
 class PieceManager
 {
+public:
 	std::vector<Piece> Pieces;
 
-public:
 	PieceManager()
 	{
 		Pieces.push_back(Piece(WK));

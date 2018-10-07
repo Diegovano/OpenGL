@@ -11,23 +11,47 @@ GLFWmousebuttonfun InputManager::GetMButtonCallback()
 	return OnMBClick;
 }
 
+void InputManager::SpecifyPieceManager(PieceManager* mgrPtr)
+{
+	m_pieceManager = mgrPtr;
+}
+
 void InputManager::RightButtonClick(GLFWwindow* window, InputManager* inptMgr)
 {
 	double xpos;
 	double ypos;
 	glfwGetCursorPos(window, &xpos, &ypos);
-	if (clickedOnPiece)
+	if (!clickedOnPiece)
+	{
+		std::cout << GetTileName(window, xpos, ypos) << std::endl;
+		glm::vec2 convertedCoords = ConvertCursorCoords(window, xpos, ypos);
+		if (convertedCoords.x < -0.8f || convertedCoords.y > 0.8f || convertedCoords.x > 0.8f || convertedCoords.y < -0.8f) return;   //what to return when invalid position
+		glm::vec2 centreCoords = GetTileCentre(convertedCoords.x, convertedCoords.y);
+		for (unsigned int iter = 0; iter < m_pieceManager->Pieces.size(); iter++)
+		{
+			for (unsigned int iter2 = 0; iter2 < m_pieceManager->Pieces[iter].AmountPieces(); iter2++)
+			{
+				if (m_pieceManager->Pieces[iter][iter2] == centreCoords)
+				{
+					*m_ptrToLastClickedPiece =
+						m_pieceManager->Pieces[iter][iter2];
+					clickedOnPiece = true;
+				}
+			}
+		}
+	}
+	else
 	{
 		glm::vec2 convertedCoords = ConvertCursorCoords(window, xpos, ypos);
 		if (convertedCoords.x < -0.8f || convertedCoords.y > 0.8f || convertedCoords.x > 0.8f || convertedCoords.y < -0.8f) return;   //what to return when invalid position
 		glm::vec2 centreCoords = GetTileCentre(convertedCoords.x, convertedCoords.y);
-//		for()
+		m_ptrToLastClickedPiece = &centreCoords;
 	}
 }
 
 glm::vec2 InputManager::ConvertCursorCoords(GLFWwindow* window, double xpos, double ypos)
 {
-	int windowx, windowy;
+	int windowx, windowy;									//look into how glfw positions work?
 	glfwGetWindowSize(window, &windowx, &windowy);
 
 	xpos -= windowx / 2;
