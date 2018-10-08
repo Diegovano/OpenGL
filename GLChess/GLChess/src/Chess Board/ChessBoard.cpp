@@ -22,12 +22,13 @@ glm::vec2 GetMovement(int x, int y)
 	return glm::vec2(x*0.2f, y*0.2f);
 }
  
-glm::vec2 GetTileCentre(double x, double y)
+glm::vec2 GetTileCentre(double converted_x, double converted_y)
 {
-	unsigned int xtile = (x + 0.8f) / 0.2f;
-	unsigned int ytile = (y + 0.8f) / 0.2f;
+	unsigned int xtile = (unsigned int)((converted_x + 0.8f) / 0.2f);
+	unsigned int ytile = (unsigned int)((converted_y + 0.8f) / 0.2f);
 
-	return Board[xtile][ytile];
+//	return Board[xtile][ytile];
+	return glm::vec2(Board[xtile % 8][ytile % 8].x, Board[xtile % 8][ytile % 8].y);
 }
 
 glm::vec2** Board(AssignBoardCoords());

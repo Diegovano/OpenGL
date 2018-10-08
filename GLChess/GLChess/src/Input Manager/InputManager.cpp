@@ -21,37 +21,46 @@ void InputManager::RightButtonClick(GLFWwindow* window, InputManager* inptMgr)
 	double xpos;
 	double ypos;
 	glfwGetCursorPos(window, &xpos, &ypos);
+
+
+	std::cout << xpos << ' ' << ypos << std::endl;
+	glm::vec2 convertedCoords = ConvertCursorCoords(window, xpos, ypos);
+	if (convertedCoords.x < -0.8f || convertedCoords.y > 0.8f || convertedCoords.x > 0.8f || convertedCoords.y < -0.8f) return;
+	std::cout << convertedCoords.x << ' ' << convertedCoords.y << std::endl;
+	std::cout << GetTileName(window, convertedCoords.x, convertedCoords.y) << std::endl;
+
+
 	if (!clickedOnPiece)
 	{
-		std::cout << GetTileName(window, xpos, ypos) << std::endl;
-		glm::vec2 convertedCoords = ConvertCursorCoords(window, xpos, ypos);
-		if (convertedCoords.x < -0.8f || convertedCoords.y > 0.8f || convertedCoords.x > 0.8f || convertedCoords.y < -0.8f) return;   //what to return when invalid position
 		glm::vec2 centreCoords = GetTileCentre(convertedCoords.x, convertedCoords.y);
+		std::cout << "Tile Centres   x: " << centreCoords.x << " | y: " << centreCoords.y << std::endl;
+//		std::cin.get();
 		for (unsigned int iter = 0; iter < m_pieceManager->Pieces.size(); iter++)
 		{
 			for (unsigned int iter2 = 0; iter2 < m_pieceManager->Pieces[iter].AmountPieces(); iter2++)
 			{
 				if (m_pieceManager->Pieces[iter][iter2] == centreCoords)
 				{
-					*m_ptrToLastClickedPiece =
-						m_pieceManager->Pieces[iter][iter2];
+					m_ptrToLastClickedPiece =
+						&m_pieceManager->Pieces[iter][iter2];
 					clickedOnPiece = true;
+					return;
 				}
 			}
 		}
 	}
 	else
 	{
-		glm::vec2 convertedCoords = ConvertCursorCoords(window, xpos, ypos);
 		if (convertedCoords.x < -0.8f || convertedCoords.y > 0.8f || convertedCoords.x > 0.8f || convertedCoords.y < -0.8f) return;   //what to return when invalid position
 		glm::vec2 centreCoords = GetTileCentre(convertedCoords.x, convertedCoords.y);
-		m_ptrToLastClickedPiece = &centreCoords;
-	}
+		*m_ptrToLastClickedPiece = centreCoords;
+		clickedOnPiece = false;
+	} 
 }
 
 glm::vec2 InputManager::ConvertCursorCoords(GLFWwindow* window, double xpos, double ypos)
 {
-	int windowx, windowy;									//look into how glfw positions work?
+	int windowx, windowy;				//look into how glfw positions work?
 	glfwGetWindowSize(window, &windowx, &windowy);
 
 	xpos -= windowx / 2;
@@ -63,20 +72,18 @@ glm::vec2 InputManager::ConvertCursorCoords(GLFWwindow* window, double xpos, dou
 	return glm::vec2(xpos, ypos);
 }
 
-std::string InputManager::GetTileName(GLFWwindow* window, double xpos, double ypos)
+std::string InputManager::GetTileName(GLFWwindow* window, double converted_x, double converted_y)
 {
-	glm::vec2 convertedCoords = ConvertCursorCoords(window, xpos, ypos);
-	if (convertedCoords.x < -0.8f || convertedCoords.y > 0.8f || convertedCoords.x > 0.8f || convertedCoords.y < -0.8f) return "";   //what to return when invalid position
-	glm::vec2 centreCoords = GetTileCentre(convertedCoords.x, convertedCoords.y);
+	glm::vec2 centreCoords = GetTileCentre(converted_x, converted_y);
+	std::cout << "Mouse Position in GL coordinates   x: " << converted_x <<
+		" | y: " << converted_y << std::endl;
+	std::cout << "Tile Centre   x: " << centreCoords.x << " | y: " << centreCoords.y << std::endl;
+
 	centreCoords.x += 0.8f;
 	centreCoords.y += 0.8f;
-	
+
 	centreCoords.x /= 0.2f;
 	centreCoords.y /= 0.2f;
-
-	std::cout << "Mouse Position in GL coordinates   x: " << ConvertCursorCoords(window, xpos, ypos).x <<
-		" | y: " << ConvertCursorCoords(window, xpos, ypos).y << std::endl;
-	std::cout << "Tile Centres   x: " << centreCoords.x << " | y: " << centreCoords.y << std::endl;
 
 	char ranks[8] = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H' };
 	char files[8] = { '1', '2', '3', '4', '5', '6', '7', '8' };
