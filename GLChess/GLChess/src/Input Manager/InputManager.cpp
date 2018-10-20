@@ -33,16 +33,17 @@ void InputManager::RightButtonClick(GLFWwindow* window, InputManager* inptMgr)
 	if (!clickedOnPiece)
 	{
 		glm::vec2 centreCoords = GetTileCentre(convertedCoords.x, convertedCoords.y);
+		std::cout << GetTileName(window, centreCoords.x, centreCoords.y) << std::endl;
 		std::cout << "Tile Centres   x: " << centreCoords.x << " | y: " << centreCoords.y << std::endl;
 //		std::cin.get();
 		for (unsigned int iter = 0; iter < m_pieceManager->Pieces.size(); iter++)
 		{
 			for (unsigned int iter2 = 0; iter2 < m_pieceManager->Pieces[iter].AmountPieces(); iter2++)
 			{
-				if (m_pieceManager->Pieces[iter][iter2] == centreCoords)
+				if (*m_pieceManager->Pieces[iter][iter2] == centreCoords)
 				{
 					m_ptrToLastClickedPiece =
-						&m_pieceManager->Pieces[iter][iter2];
+						m_pieceManager->Pieces[iter][iter2];
 					clickedOnPiece = true;
 					return;
 				}
@@ -55,6 +56,7 @@ void InputManager::RightButtonClick(GLFWwindow* window, InputManager* inptMgr)
 		glm::vec2 centreCoords = GetTileCentre(convertedCoords.x, convertedCoords.y);
 		*m_ptrToLastClickedPiece = centreCoords;
 		clickedOnPiece = false;
+		std::cout << m_pieceManager->Pieces[4][0]->x << ' ' << m_pieceManager->Pieces[4][0]->y << std::endl;
 	} 
 }
 

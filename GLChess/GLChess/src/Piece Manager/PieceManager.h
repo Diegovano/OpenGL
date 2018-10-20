@@ -118,7 +118,7 @@ public:
 		}
 	}
 
-	glm::vec2 operator[](const unsigned int p_iter) const;
+	glm::vec2* operator[](const unsigned int p_iter) const;
 
 	const PieceName GetName() const;
 	const bool IsWhite() const;
