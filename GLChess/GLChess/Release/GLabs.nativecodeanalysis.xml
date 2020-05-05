@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DEFECTS>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\Program Files (x86)\dev\OpenGL\GLChess\GLChess\src\Abstraction\</FILEPATH>
+      <FILENAME>GLabs.h</FILENAME>
+      <LINE>56</LINE>
+      <COLUMN>2</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'GLabs::Shader::m_shaderSource' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>GLabs::Shader::{ctor}</FUNCTION>
+    <DECORATED>??0Shader@GLabs@@QAE@I@Z</DECORATED>
+    <FUNCLINE>56</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>GLabs::Shader::m_shaderSource</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\Program Files (x86)\dev\OpenGL\GLChess\GLChess\src\Abstraction\</FILEPATH>
+      <FILENAME>GLabs.cpp</FILENAME>
+      <LINE>41</LINE>
+      <COLUMN>34</COLUMN>
+    </SFA>
+    <DEFECTCODE>6255</DEFECTCODE>
+    <DESCRIPTION>_alloca indicates failure by raising a stack overflow exception.  Consider using _malloca instead.</DESCRIPTION>
+    <FUNCTION>GLabs::Shader::Compile</FUNCTION>
+    <DECORATED>?Compile@Shader@GLabs@@QAE_NXZ</DECORATED>
+    <FUNCLINE>31</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\Program Files (x86)\dev\OpenGL\GLChess\GLChess\src\Abstraction\</FILEPATH>
+      <FILENAME>GLabs.cpp</FILENAME>
+      <LINE>83</LINE>
+      <COLUMN>34</COLUMN>
+    </SFA>
+    <DEFECTCODE>6255</DEFECTCODE>
+    <DESCRIPTION>_alloca indicates failure by raising a stack overflow exception.  Consider using _malloca instead.</DESCRIPTION>
+    <FUNCTION>GLabs::ShaderProgram::Link</FUNCTION>
+    <DECORATED>?Link@ShaderProgram@GLabs@@QAE_NXZ</DECORATED>
+    <FUNCLINE>74</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+</DEFECTS>

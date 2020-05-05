@@ -4,8 +4,8 @@
 
 GLabs::ShaderProgram SpriteShaderProgram()
 {
-	std::ifstream vshFileStream("D:\\Program Files (x86)\\msdev\\OpenGL\\GLChess\\GLChess\\rsc\\Shader\\SpriteShaders\\spriteVsh.shader");
-	std::ifstream fshFileStream("D:\\Program Files (x86)\\msdev\\OpenGL\\GLChess\\GLChess\\rsc\\Shader\\SpriteShaders\\spriteFsh.shader");
+	std::ifstream vshFileStream("..\\GLChess\\rsc\\Shader\\SpriteShaders\\spriteVsh.shader");
+	std::ifstream fshFileStream("..\\GLChess\\rsc\\Shader\\SpriteShaders\\spriteFsh.shader");
 
 	std::string strVertexShader = std::string(std::istreambuf_iterator<char>(vshFileStream), std::istreambuf_iterator<char>());
 	std::string strFragmentShader = std::string(std::istreambuf_iterator<char>(fshFileStream), std::istreambuf_iterator<char>());

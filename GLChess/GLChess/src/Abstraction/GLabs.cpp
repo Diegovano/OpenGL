@@ -1,5 +1,5 @@
 #include "GLabs.h"
-
+#include <assert.h>
 
 
 void GLabs::Buffer::Bind(GLenum bindPoint)
@@ -80,7 +80,7 @@ bool GLabs::ShaderProgram::Link()
 	{
 		GLint infoLogLength = 0;
 		glGetProgramiv(m_programID, GL_INFO_LOG_LENGTH, &infoLogLength);
-		GLchar* buffer = (GLchar*)alloca(infoLogLength * sizeof(GLchar));
+		GLchar* buffer = (GLchar*)_malloca(infoLogLength * sizeof(GLchar));
 		GLsizei bufferSize;
 		glGetProgramInfoLog(m_programID, infoLogLength * sizeof(GLchar), &bufferSize, buffer);
 		std::cout << "Link Error: " << (buffer) << std::endl;
@@ -95,6 +95,7 @@ void GLabs::ShaderProgram::UseProgram() const
 	if (!m_linked)
 	{
 		std::cerr << "Program Not Linked!" << std::endl;
+		assert(0);
 		return;
 	}
 	glUseProgram(m_programID);

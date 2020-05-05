@@ -4,8 +4,8 @@
 
 GLabs::ShaderProgram ShaderProgram()
 {
-	std::ifstream vshFileStream("D:\\Program Files (x86)\\msdev\\OpenGL\\GLChess\\GLChess\\rsc\\Shader\\vsh.shader");
-	std::ifstream fshFileStream("D:\\Program Files (x86)\\msdev\\OpenGL\\GLChess\\GLChess\\rsc\\Shader\\fsh.shader");
+	std::ifstream vshFileStream("..\\GLChess\\rsc\\Shader\\vsh.shader");
+	std::ifstream fshFileStream("..\\GLChess\\rsc\\Shader\\fsh.shader");
 
 	std::string strVertexShader = std::string(std::istreambuf_iterator<char>(vshFileStream), std::istreambuf_iterator<char>());
 	std::string strFragmentShader = std::string(std::istreambuf_iterator<char>(fshFileStream), std::istreambuf_iterator<char>());

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DEFECTS>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\Program Files (x86)\dev\OpenGL\GLChess\GLChess\src\Abstraction\</FILEPATH>
+      <FILENAME>GLabs.h</FILENAME>
+      <LINE>56</LINE>
+      <COLUMN>2</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'GLabs::Shader::m_shaderSource' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>GLabs::Shader::{ctor}</FUNCTION>
+    <DECORATED>??0Shader@GLabs@@QAE@I@Z</DECORATED>
+    <FUNCLINE>56</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>GLabs::Shader::m_shaderSource</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+</DEFECTS>

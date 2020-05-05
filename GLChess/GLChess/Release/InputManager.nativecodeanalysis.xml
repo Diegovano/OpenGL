@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DEFECTS>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\Program Files (x86)\dev\OpenGL\GLChess\GLChess\src\Abstraction\</FILEPATH>
+      <FILENAME>GLabs.h</FILENAME>
+      <LINE>56</LINE>
+      <COLUMN>2</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'GLabs::Shader::m_shaderSource' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>GLabs::Shader::{ctor}</FUNCTION>
+    <DECORATED>??0Shader@GLabs@@QAE@I@Z</DECORATED>
+    <FUNCLINE>56</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>GLabs::Shader::m_shaderSource</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\Program Files (x86)\dev\OpenGL\GLChess\GLChess\src\Piece Manager\</FILEPATH>
+      <FILENAME>PieceManager.h</FILENAME>
+      <LINE>41</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26812</DEFECTCODE>
+    <DESCRIPTION>The enum type 'PieceName' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).</DESCRIPTION>
+    <FUNCTION>Piece::{ctor}</FUNCTION>
+    <DECORATED>??0Piece@@QAE@W4PieceName@@@Z</DECORATED>
+    <FUNCLINE>41</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\Program Files (x86)\dev\OpenGL\GLChess\GLChess\src\Piece Manager\</FILEPATH>
+      <FILENAME>PieceManager.h</FILENAME>
+      <LINE>41</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Piece::amountPieces' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Piece::{ctor}</FUNCTION>
+    <DECORATED>??0Piece@@QAE@W4PieceName@@@Z</DECORATED>
+    <FUNCLINE>41</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Piece::amountPieces</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\Program Files (x86)\dev\OpenGL\GLChess\GLChess\src\Piece Manager\</FILEPATH>
+      <FILENAME>PieceManager.h</FILENAME>
+      <LINE>41</LINE>
+      <COLUMN>1</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Piece::position' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Piece::{ctor}</FUNCTION>
+    <DECORATED>??0Piece@@QAE@W4PieceName@@@Z</DECORATED>
+    <FUNCLINE>41</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Piece::position</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>D:\Program Files (x86)\dev\OpenGL\GLChess\GLChess\src\Input Manager\</FILEPATH>
+      <FILENAME>InputManager.cpp</FILENAME>
+      <LINE>72</LINE>
+      <COLUMN>23</COLUMN>
+    </SFA>
+    <DEFECTCODE>26451</DEFECTCODE>
+    <DESCRIPTION>Arithmetic overflow: Using operator '*' on a 4 byte value and then casting the result to a 8 byte value. Cast the value to the wider type before calling operator '*' to avoid overflow (io.2).</DESCRIPTION>
+    <FUNCTION>InputManager::ConvertCursorCoords</FUNCTION>
+    <DECORATED>?ConvertCursorCoords@InputManager@@QAE?AU?$vec@$01M$0A@@glm@@PAUGLFWwindow@@NN@Z</DECORATED>
+    <FUNCLINE>63</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+</DEFECTS>
